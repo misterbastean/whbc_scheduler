@@ -1,0 +1,185 @@
+# Summary
+A simple web app that allows users to create events and have end users register to attend those events as workers or participants. Event owners can assign workers and participants to roles or groups and get various reports.
+
+## Routes Notes
+Start off at landing page with banner at top to login as user, but shows index of events for workers/participants to register. Registration page (separate for workers and participants) is just a form that adds to the DB. Make sure to add an option at end of form to register another person with the same info (e.g. multiple kids).
+
+### Routes
+#### Events
+
+| Name                  | Method  | Endpoint
+|-----------------------|---------|----------
+|Index                  | GET     | /events
+|New Event Form         | GET     | /events/new
+|Create Event           | POST    | /events/new
+|Show Event             | GET     | /events/:id
+|Edit Event             | GET     | /events/:id/edit
+|Update Event           | PUT     | /events/:id
+|Delete Event           | DELETE  | /events/:id
+|Show Add Workers       | GET     | /events/:id/workers
+|Add Workers            | POST    | /events/:id/workers
+|Show Add Participants  | GET     | /events/:id/participants
+|Add Participants       | POST    | /events/:id/participants
+
+
+#### Users
+| Name                 | Method  | Endpoint
+|----------------------|---------|----------
+|User Index            | GET     | /users
+|New User Form         | GET     | /users/new
+|Create User           | POST    | /users/new
+|Show User             | GET     | /users/:id
+|Edit User             | GET     | /users/:id/edit
+|Update User           | PUT     | /users/:id
+|Delete User           | DELETE  | /users/:id
+
+#### Workers
+| Name                 | Method  | Endpoint
+|----------------------|---------|----------
+|Worker Index          | GET     | /users/:id/workers
+|New Worker Form       | GET     | /users/:id//workers/new
+|Create Worker         | POST    | /users/:id//workers/new
+|Show Worker           | GET     | /users/:id//workers/:id
+|Edit Worker           | GET     | /users/:id//workers/:id/edit
+|Update Worker         | PUT     | /users/:id//workers/:id
+|Delete Worker         | DELETE  | /users/:id//workers/:id
+
+#### Participants
+| Name                 | Method  | Endpoint
+|----------------------|---------|----------
+|Participant Index     | GET     | /users/:id/participants
+|New Participant Form  | GET     | /users/:id/participants/new
+|Create Participant    | POST    | /users/:id/participants/new
+|Show Participant      | GET     | /users/:id/participants/:id
+|Edit Participant      | GET     | /users/:id/participants/:id/edit
+|Update Participant    | PUT     | /users/:id/participants/:id
+|Delete Participant    | DELETE  | /users/:id/participants/:id
+
+## Data Structure
+
+
+### Event
+Object representing an event. image_url should include "http[s]://"
+```javascript
+{  
+  _id: id,  
+  name: String,  
+  description: String,  
+  image_url: String,  
+  contact: User,  
+  registration_cutoff: Date,  
+  dates: [Date],  
+  worker_roles: [String],  
+  participant_groups: [String],  
+  workers: [Worker],  
+  participants: [Participant]  
+}
+```
+
+### User
+Object representing a user of the web app. Normal Users are used for authentication and authorization, and can have multiple Workers and/or Participants linked to their account. The purpose is to allow one person (e.g. a parent) to create and manage multiple Workers and/or Participants.
+
+Admin Users are able to create events, as well as read, edit, and delete events they created. They can also read and edit their own profile.
+
+Superusers are able to CRUD all admins, users, and events.
+
+Password item is a hashed string. Consider implementing Google SSO.
+
+```javascript
+{  
+  _id: id,
+  username: String,
+  password: String,
+  events: [Event],
+  email: String,
+  phone: String,
+  is_admin: Boolean,
+  is_superuser: Boolean
+}
+```
+
+### Worker
+Object representing a worker, such as a volunteer, teacher, group leader, etc. Currently, these are specific to a single User, but can be added to multiple events.
+
+```javascript
+{  
+  _id: id,  
+  first_name: String,  
+  last_name: String,  
+  preferred_name: String,  
+  gender: String,  
+  dob: Date,  
+  address: String,  
+  city: String,  
+  state: String,  
+  zip: String,  
+  phone: String, // 555-555-5555
+  email: String,  
+  emergency_contacts: [
+    {
+      name: String,  
+      phone: String, // 555-555-5555  
+      relationship: String  
+    }
+  ],  
+  shirt_size: String,  
+  comments: String,  
+  events: [  
+    {  
+      name: Event,  
+      role: [String],  
+      group: [String],  
+      completed_paperwork: Boolean  
+    }
+  ]
+}
+```
+
+### Participant
+Object representing a participant (i.e. a person attending the event). Currently, these are specific to a single User, but can be added to multiple events.
+
+```javascript
+{
+  _id: id,
+  first_name: String,  
+  last_name: String,  
+  preferred_name: String,  
+  gender: String,  
+  dob: Date,  
+  medical: String,  
+  is_adult: Boolean,  
+  address: String,  
+  city: String,  
+  state: String,  
+  zip: String,  
+  phone: String, // 555-555-5555  
+  email: String,  
+  allergies: [String],  
+  emergency_contacts: [
+    {
+      name: String,  
+      phone: String, // 555-555-5555  
+      relationship: String  
+    }
+  ],  
+  authorized_pickups: [
+    {
+      name: String,  
+      phone: String // 555-555-5555
+    }
+  ],
+  shirt_size: String,  
+  church_member: Boolean,  
+  church: String,  
+  photo_permission: Boolean,  
+  photo_publication: Boolean,  
+  comments: String,  
+  events: [  
+    {  
+      name: Event,  
+      role: [String],  
+      group: [String],
+      completed_paperwork: Boolean   
+    }
+  ]
+}
