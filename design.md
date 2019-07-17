@@ -51,21 +51,21 @@ Start off at landing page with banner at top to login as user, but shows index o
 |Worker Index          | GET     | /users/:id/workers
 |New Worker Form       | GET     | /users/:id/workers/new
 |Create Worker         | POST    | /users/:id/workers
-|Show Worker           | GET     | /users/:id/workers/:id
-|Edit Worker           | GET     | /users/:id/workers/:id/edit
-|Update Worker         | PUT     | /users/:id/workers/:id
-|Delete Worker         | DELETE  | /users/:id/workers/:id
+|Show Worker           | GET     | /users/:id/workers/:wid
+|Edit Worker           | GET     | /users/:id/workers/:wid/edit
+|Update Worker         | PUT     | /users/:id/workers/:wid
+|Delete Worker         | DELETE  | /users/:id/workers/:wid
 
 #### Participants
 | Name                 | Method  | Endpoint
 |----------------------|---------|----------
 |Participant Index     | GET     | /users/:id/participants
 |New Participant Form  | GET     | /users/:id/participants/new
-|Create Participant    | POST    | /users/:id/participants/new
-|Show Participant      | GET     | /users/:id/participants/:id
-|Edit Participant      | GET     | /users/:id/participants/:id/edit
-|Update Participant    | PUT     | /users/:id/participants/:id
-|Delete Participant    | DELETE  | /users/:id/participants/:id
+|Create Participant    | POST    | /users/:id/participants
+|Show Participant      | GET     | /users/:id/participants/:pid
+|Edit Participant      | GET     | /users/:id/participants/:pid/edit
+|Update Participant    | PUT     | /users/:id/participants/:pid
+|Delete Participant    | DELETE  | /users/:id/participants/:pid
 
 ## Data Structure
 
@@ -74,7 +74,7 @@ Start off at landing page with banner at top to login as user, but shows index o
 Object representing an event. image_url should include "http[s]://"
 ```javascript
 {  
-  _id: id,  
+  _id: String,  
   name: String,  
   description: String,  
   image_url: String,  
@@ -99,7 +99,7 @@ Password item is a hashed string. Consider implementing Google SSO.
 
 ```javascript
 {  
-  _id: id,
+  _id: String,
   username: String,
   password: String,
   events: [Event],
@@ -115,7 +115,7 @@ Object representing a worker, such as a volunteer, teacher, group leader, etc. C
 
 ```javascript
 {  
-  _id: id,  
+  _id: String,  
   first_name: String,  
   last_name: String,  
   preferred_name: String,  
@@ -138,7 +138,7 @@ Object representing a worker, such as a volunteer, teacher, group leader, etc. C
   comments: String,  
   events: [  
     {  
-      name: Event,  
+      id: String,  
       role: [String],  
       group: [String],  
       completed_paperwork: Boolean  
@@ -152,7 +152,7 @@ Object representing a participant (i.e. a person attending the event). Currently
 
 ```javascript
 {
-  _id: id,
+  _id: String,
   first_name: String,  
   last_name: String,  
   preferred_name: String,  
@@ -188,7 +188,7 @@ Object representing a participant (i.e. a person attending the event). Currently
   comments: String,  
   events: [  
     {  
-      name: Event,  
+      id: String,  
       role: [String],  
       group: [String],
       completed_paperwork: Boolean   
