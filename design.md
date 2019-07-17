@@ -5,11 +5,19 @@ A simple web app that allows users to create events and have end users register 
 Start off at landing page with banner at top to login as user, but shows index of events for workers/participants to register. Registration page (separate for workers and participants) is just a form that adds to the DB. Make sure to add an option at end of form to register another person with the same info (e.g. multiple kids).
 
 ### Routes
+#### App
+| Name                  | Method  | Endpoint
+|-----------------------|---------|----------
+|Landing                | GET     | /
+|Show Login Form        | GET     | /login
+|Log User In            | POST    | /login
+|Log User Out           | POST    | /logout
+
 #### Events
 
 | Name                  | Method  | Endpoint
 |-----------------------|---------|----------
-|Index                  | GET     | /events
+|Event Index            | GET     | /events
 |New Event Form         | GET     | /events/new
 |Create Event           | POST    | /events/new
 |Show Event             | GET     | /events/:id
