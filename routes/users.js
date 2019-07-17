@@ -1,6 +1,10 @@
 const express = require('express'),
       router  = express.Router();
 
+
+// =====================
+// USERS
+// =====================
 router.get('/', (req, res) => {
   res.send('Show index of users')
 });
@@ -29,5 +33,66 @@ router.delete('/:id', (req, res) => {
   res.send(`Delete user with ID of ${req.params.id}`)
 });
 
+// =====================
+// WORKERS
+// =====================
+router.get('/:id/workers', (req, res) => {
+  res.send(`Show index of all workers associated with user ID ${req.params.id}`)
+});
+
+router.get('/:id/workers/new', (req, res) => {
+  res.send(`Show form to create new worker associated with user ID ${req.params.id}`)
+});
+
+router.post('/:id/workers', (req, res) => {
+  res.send(`Create new worker associated with user ID ${req.params.id}`)
+});
+
+router.get('/:id/workers/:wid', (req, res) => {
+  res.send(`Get information about worker ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
+});
+
+router.get('/:id/workers/:wid/edit', (req, res) => {
+  res.send(`Show edit form for worker ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
+});
+
+router.put('/:id/workers/:wid', (req, res) => {
+  res.send(`Update information for worker ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
+});
+
+router.delete('/:id/workers/:wid', (req, res) => {
+  res.send(`Delete worker ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
+});
+
+// =====================
+// PARTICIPANTS
+// =====================
+router.get('/:id/participants', (req, res) => {
+  res.send(`Show index of all participants associated with user ID ${req.params.id}`)
+});
+
+router.get('/:id/participants/new', (req, res) => {
+  res.send(`Show form to create new participant associated with user ID ${req.params.id}`)
+});
+
+router.post('/:id/participants', (req, res) => {
+  res.send(`Create new participant associated with user ID ${req.params.id}`)
+});
+
+router.get('/:id/participants/:wid', (req, res) => {
+  res.send(`Get information about participant ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
+});
+
+router.get('/:id/participants/:wid/edit', (req, res) => {
+  res.send(`Show edit form for participant ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
+});
+
+router.put('/:id/participants/:wid', (req, res) => {
+  res.send(`Update information for participant ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
+});
+
+router.delete('/:id/participants/:wid', (req, res) => {
+  res.send(`Delete participant ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
+});
 
 module.exports = router;

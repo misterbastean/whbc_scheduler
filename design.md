@@ -49,12 +49,12 @@ Start off at landing page with banner at top to login as user, but shows index o
 | Name                 | Method  | Endpoint
 |----------------------|---------|----------
 |Worker Index          | GET     | /users/:id/workers
-|New Worker Form       | GET     | /users/:id//workers/new
-|Create Worker         | POST    | /users/:id//workers/new
-|Show Worker           | GET     | /users/:id//workers/:id
-|Edit Worker           | GET     | /users/:id//workers/:id/edit
-|Update Worker         | PUT     | /users/:id//workers/:id
-|Delete Worker         | DELETE  | /users/:id//workers/:id
+|New Worker Form       | GET     | /users/:id/workers/new
+|Create Worker         | POST    | /users/:id/workers
+|Show Worker           | GET     | /users/:id/workers/:id
+|Edit Worker           | GET     | /users/:id/workers/:id/edit
+|Update Worker         | PUT     | /users/:id/workers/:id
+|Delete Worker         | DELETE  | /users/:id/workers/:id
 
 #### Participants
 | Name                 | Method  | Endpoint
