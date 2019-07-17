@@ -3,7 +3,7 @@ const express   = require('express'),
 
 
 router.get('/', (req, res) => {
-  res.send('Landing page')
+  res.render('landing')
 });
 
 router.get('/login', (req, res) => {
@@ -11,7 +11,7 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  res.send('Log user in, then redirect to /')
+  res.send('Log user in, then redirect to /events')
 });
 
 router.post('/logout', (req, res) => {

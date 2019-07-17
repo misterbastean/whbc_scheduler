@@ -19,7 +19,7 @@ Start off at landing page with banner at top to login as user, but shows index o
 |-----------------------|---------|----------
 |Event Index            | GET     | /events
 |New Event Form         | GET     | /events/new
-|Create Event           | POST    | /events/new
+|Create Event           | POST    | /events
 |Show Event             | GET     | /events/:id
 |Edit Event             | GET     | /events/:id/edit
 |Update Event           | PUT     | /events/:id
