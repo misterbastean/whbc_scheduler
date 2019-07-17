@@ -16,6 +16,7 @@ const express               = require('express'),
 
 // Route Imports
 const indexRoutes = require('./routes/index');
+const userRoutes = require('./routes/users');
 const eventRoutes = require('./routes/events');
 
 // MethodOverride Config
@@ -49,6 +50,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Use routes
 app.use('/', indexRoutes);
 app.use('/events', eventRoutes);
+app.use('/users', userRoutes);
 
 // Listening
 app.listen(process.env.PORT || 3000, process.env.IP, () => {

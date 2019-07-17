@@ -24,10 +24,14 @@ Start off at landing page with banner at top to login as user, but shows index o
 |Edit Event             | GET     | /events/:id/edit
 |Update Event           | PUT     | /events/:id
 |Delete Event           | DELETE  | /events/:id
-|Show Add Workers       | GET     | /events/:id/workers
-|Add Workers            | POST    | /events/:id/workers
-|Show Add Participants  | GET     | /events/:id/participants
-|Add Participants       | POST    | /events/:id/participants
+|Show Add Worker        | GET     | /events/:id/workers/new
+|Add Worker             | POST    | /events/:id/workers
+|Show Edit Workers      | GET     | /events/:id/workers/edit
+|Update Workers         | PUT     | /events/:id/workers
+|Show Add Participant   | GET     | /events/:id/participants/new
+|Add Participant        | POST    | /events/:id/participants
+|Show Edit Participants | GET     | /events/:id/participants/edit
+|Update Participants    | PUT     | /events/:id/participants
 
 
 #### Users
@@ -35,7 +39,7 @@ Start off at landing page with banner at top to login as user, but shows index o
 |----------------------|---------|----------
 |User Index            | GET     | /users
 |New User Form         | GET     | /users/new
-|Create User           | POST    | /users/new
+|Create User           | POST    | /users
 |Show User             | GET     | /users/:id
 |Edit User             | GET     | /users/:id/edit
 |Update User           | PUT     | /users/:id
