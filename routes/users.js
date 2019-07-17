@@ -33,6 +33,7 @@ router.delete('/:id', (req, res) => {
   res.send(`Delete user with ID of ${req.params.id}`)
 });
 
+
 // =====================
 // WORKERS
 // =====================
@@ -64,6 +65,7 @@ router.delete('/:id/workers/:wid', (req, res) => {
   res.send(`Delete worker ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
 });
 
+
 // =====================
 // PARTICIPANTS
 // =====================
@@ -79,20 +81,21 @@ router.post('/:id/participants', (req, res) => {
   res.send(`Create new participant associated with user ID ${req.params.id}`)
 });
 
-router.get('/:id/participants/:wid', (req, res) => {
-  res.send(`Get information about participant ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
+router.get('/:id/participants/:pid', (req, res) => {
+  res.send(`Get information about participant ID ${req.params.pid}, who is associated with user ID ${req.params.id}`)
 });
 
-router.get('/:id/participants/:wid/edit', (req, res) => {
-  res.send(`Show edit form for participant ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
+router.get('/:id/participants/:pid/edit', (req, res) => {
+  res.send(`Show edit form for participant ID ${req.params.pid}, who is associated with user ID ${req.params.id}`)
 });
 
-router.put('/:id/participants/:wid', (req, res) => {
-  res.send(`Update information for participant ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
+router.put('/:id/participants/:pid', (req, res) => {
+  res.send(`Update information for participant ID ${req.params.pid}, who is associated with user ID ${req.params.id}`)
 });
 
-router.delete('/:id/participants/:wid', (req, res) => {
-  res.send(`Delete participant ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
+router.delete('/:id/participants/:pid', (req, res) => {
+  res.send(`Delete participant ID ${req.params.pid}, who is associated with user ID ${req.params.id}`)
 });
+
 
 module.exports = router;
