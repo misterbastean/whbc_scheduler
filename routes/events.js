@@ -1,5 +1,6 @@
 const express       = require('express'),
-      router        = express.Router();
+      router        = express.Router(),
+      Event         = require('../models/event');
 
 // =============================
 // EVENTS
@@ -36,16 +37,18 @@ router.post('/', (req, res) => {
     registrationCutoff: req.body.registrationCutoff,
     eventDates: req.body.eventDates,
     workerRoles,
-    participantGroups,
-    workers: [],
-    participants: []
+    participantGroups
   }
 
-  console.log(newEvent);
-
-
-
-  res.redirect("/events") // Need to update this to redirect to the new event page instead of the index.
+  Event.create(newEvent, (err, addedEvent) => {
+    if (err) {
+      console.log(err);
+      res.redirect('back');
+    } else {
+      console.log("Event added");
+      res.redirect(`/events/${addedEvent._id}`)
+    }
+  })
 });
 
 router.get('/:id', (req, res) => {

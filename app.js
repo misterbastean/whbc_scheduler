@@ -3,7 +3,8 @@ const express               = require('express'),
       mongoose              = require('mongoose'),
       bodyParser            = require('body-parser'),
       methodOverride        = require('method-override'),
-      path                  = require('path')
+      path                  = require('path'),
+      utils                 = require('./utils')
 
       // Only import config if working locally
       let config;
@@ -54,6 +55,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/', indexRoutes);
 app.use('/events', eventRoutes);
 app.use('/users', userRoutes);
+
+// Seed DB
+utils.seedDb();
 
 // Listening
 app.listen(process.env.PORT || 3000, process.env.IP, () => {
