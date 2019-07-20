@@ -22,18 +22,21 @@ const eventRoutes = require('./routes/events');
 // MethodOverride Config
 app.use(methodOverride('_method'));
 
-//Mongoose setup and config
+// //Mongoose setup and config
 mongoose.Promise = global.Promise;
 const mongooseOptions = {
   useNewUrlParser: true
 }
-const connectString = `mongodb+srv://${config.database.username}:${config.database.password}@whbc-scheduler-dlmgb.mongodb.net/test?retryWrites=true&w=majority`
-try {
-  mongoose.connect(connectString, mongooseOptions);
-} catch(e) {
-  console.log("DB Connection fallback");
-  mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@whbc-scheduler-dlmgb.mongodb.net/test?retryWrites=true&w=majority`, mongooseOptions);
-}
+// const connectString = `mongodb+srv://${config.database.username}:${config.database.password}@whbc-scheduler-dlmgb.mongodb.net/test?retryWrites=true&w=majority`
+// try {
+//   mongoose.connect(connectString, mongooseOptions);
+// } catch(e) {
+//   console.log("DB Connection fallback");
+//   mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@whbc-scheduler-dlmgb.mongodb.net/test?retryWrites=true&w=majority`, mongooseOptions);
+// }
+
+// MONGOOSE LOCALHOST CONNECTION
+mongoose.connect("mongodb://localhost/scheduler_db", mongooseOptions, () => console.log("LOCALHOST DB IN USE!!!"));
 
 
 // bodyParser setup

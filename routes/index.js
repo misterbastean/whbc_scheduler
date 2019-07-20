@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  res.send('Show login form')
+  res.render('login')
 });
 
 router.post('/login', (req, res) => {

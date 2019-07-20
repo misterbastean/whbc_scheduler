@@ -1,0 +1,16 @@
+<% include ../partials/header %>
+
+</head>
+<body>
+
+<% include ../partials/navbar %>
+
+<div class="container">
+  <h1>Edit Event Form</h1>
+  <form action="/events/<% selected_event._id %>?_method=PUT" method="POST">
+      <input type="text" name="eventName" placeholder="e.g. VBS 2020">
+      <button type="submit" name="button">Create Event</button>
+  </form>
+</div>
+
+<% include ../partials/footer %>

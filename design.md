@@ -77,12 +77,12 @@ Object representing an event. image_url should include "http[s]://"
   _id: String,  
   name: String,  
   description: String,  
-  image_url: String,  
+  imageUrl: String,  
   contact: User,  
-  registration_cutoff: Date,  
+  registrationCutoff: Date,  
   dates: [Date],  
-  worker_roles: [String],  
-  participant_groups: [String],  
+  workerRoles: [String],  
+  participantGroups: [String],  
   workers: [Worker],  
   participants: [Participant]  
 }

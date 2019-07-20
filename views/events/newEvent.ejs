@@ -1,0 +1,44 @@
+<% include ../partials/header %>
+
+</head>
+<body>
+
+<% include ../partials/navbar %>
+
+<div class="container">
+  <br>
+  <h1>New Event Form</h1>
+  <form method="POST" action="/events">
+    <div class="form-group">
+      <label for="eventName">Event Name</label>
+      <input type="text" class="form-control" id="eventName" name="eventName" placeholder="e.g. VBS 2020">
+    </div>
+    <div class="form-group">
+      <label for="eventDescription">Description</label>
+      <input type="text" class="form-control" id="eventDescription" name="eventDescription" placeholder="An awesome time with cool people...">
+    </div>
+    <div class="form-group">
+      <label for="imageUrl">Image URL</label>
+      <input type="text" class="form-control" id="imageUrl" name="imageUrl" placeholder="https://" value="https://via.placeholder.com/150">
+    </div>
+    <div class="form-group">
+      <label for="registrationCutoff">Registration Cutoff</label> <!-- Need to update to a calendar selector -->
+      <input type="text" class="form-control" id="registrationCutoff" name="registrationCutoff" placeholder="July 4, 2019">
+    </div>
+    <div class="form-group">
+      <label for="eventDates">Event Dates</label> <!-- Need to update to a calendar selector -->
+      <input type="text" class="form-control" id="eventDates" name="eventDates" placeholder="July 5, 2019 - July 9, 2019">
+    </div>
+    <div class="form-group">
+      <label for="workerRoles">Worker Roles</label>
+      <input type="text" class="form-control" id="workerRoles" name="workerRoles" placeholder="Comma-separated list. e.g. Registration, Recreation, Kitchen, etc.">
+    </div>
+    <div class="form-group">
+      <label for="participantGroups">Participant Groups</label>
+      <input type="text" class="form-control" id="participantGroups" name="participantGroups" placeholder="Comma-separated list. e.g. Blue Group, Giraffes, 5th Grade, etc.">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<% include ../partials/footer %>
