@@ -6,7 +6,15 @@ const express       = require('express'),
 // EVENTS
 // =============================
 router.get('/', (req, res) => {
-  res.render("events/showEvents")
+  Event.find({})
+  .exec((err, foundEvents) => {
+    if (err) {
+      console.log(err);
+      res.send('Error fetching events.')
+    } else {
+      res.render('events/showEvents', {events: foundEvents})
+    }
+  })
 });
 
 router.get('/new', (req, res) => {
