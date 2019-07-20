@@ -22,31 +22,25 @@ router.post('/', (req, res) => {
     imageUrl = 'https://via.placeholder.com/150';
   }
 
-  // // Create workerRoles array
-  // let workerRoles
-  // req.body.workerRoles.forEach((role) => {
-  //   workerRoles.push(role)
-  // });
-  //
-  // // Create participantGroups array
-  // let participantGroups
-  // req.body.participantRoles.forEach((group) => {
-  //   participantRoles.push(group)
-  // });
+  // Create workerRoles array
+  let workerRoles = req.body.workerRoles.split(",")
+
+  // Create participantGroups array
+  let participantGroups = req.body.participantGroups.split(",")
 
   // Create event object
   const newEvent = {
     name: req.body.eventName,
     description: req.body.eventDescription,
     imageUrl,
-    contact: "Currently logged-in user", // Need to fix once user login middleware is setup
     registrationCutoff: req.body.registrationCutoff,
     eventDates: req.body.eventDates,
-    workerRoles: req.body.workerRoles,
-    participantGroups: req.body.participantGroups,
+    workerRoles,
+    participantGroups,
     workers: [],
     participants: []
   }
+
   console.log(newEvent);
 
 
