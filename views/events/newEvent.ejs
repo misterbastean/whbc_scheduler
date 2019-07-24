@@ -1,5 +1,7 @@
 <% include ../partials/header %>
-
+  <!-- Datepicker -->
+  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -26,8 +28,10 @@
       <input type="text" class="form-control" id="registrationCutoff" name="registrationCutoff" placeholder="July 4, 2019">
     </div>
     <div class="form-group">
-      <label for="eventDates">Event Dates</label> <!-- Need to update to a calendar selector -->
-      <input type="text" class="form-control" id="eventDates" name="eventDates" placeholder="July 5, 2019 - July 9, 2019">
+      <label for="startDate">Start Date</label>
+      <input class="form-control" id="startDate" name="startDate" width="276">
+      <label for="endDate">End Date</label>
+      <input class="form-control" id="endDate" name="endDate" width="276">
     </div>
     <div class="form-group">
       <label for="workerRoles">Worker Roles</label>
@@ -40,5 +44,14 @@
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
+
+<script>
+  $('#startDate').datepicker({
+    uiLibrary: 'bootstrap4'
+  });
+  $('#endDate').datepicker({
+    uiLibrary: 'bootstrap4'
+  });
+</script>
 
 <% include ../partials/footer %>
