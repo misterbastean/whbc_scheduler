@@ -6,10 +6,59 @@
 <% include ../partials/navbar %>
 
 <div class="container">
+  <br>
   <h1>Edit Event Form</h1>
-  <form action="/events/<% selected_event._id %>?_method=PUT" method="POST">
-      <input type="text" name="eventName" placeholder="e.g. VBS 2020">
-      <button type="submit" name="button">Create Event</button>
+  <form method="POST" action="/events/<%= foundEvent._id %>?_method=PUT">
+    <div class="form-group">
+      <label for="eventName">Event Name</label>
+      <input type="text" class="form-control" id="eventName" name="eventName" value="<%= foundEvent.name %>">
+    </div>
+    <div class="form-group">
+      <label for="eventDescription">Description</label>
+      <input type="text" class="form-control" id="eventDescription" name="eventDescription" value="<%= foundEvent.description %>">
+    </div>
+    <div class="form-group">
+      <label for="imageUrl">Image URL</label>
+      <input type="text" class="form-control" id="imageUrl" name="imageUrl" placeholder="https://" value="<%= foundEvent.imageUrl %>">
+    </div>
+    <div class="form-group">
+      <label for="registrationCutoff">Registration Cutoff</label> <!-- Need to update to a calendar selector -->
+      <input type="text" class="form-control" id="registrationCutoff" name="registrationCutoff" value="<%= foundEvent.registrationCutoff.toLocaleDateString("en-US") %>">
+    </div>
+    <div class="form-group">
+      <label for="eventDates">Event Dates</label> <!-- Need to update to a calendar selector -->
+      <%  dateRange = ''
+      if (foundEvent.dates.length == 1) {
+        dateRange = foundEvent.dates[0].toLocaleDateString("en-US")
+      } else if (foundEvent.dates.length > 1) {
+        dateRange = foundEvent.dates[0].toLocaleDateString("en-US") + " - " + foundEvent.dates[foundEvent.dates.length - 1].toLocaleDateString("en-US")
+      }
+      %>
+      <input type="text" class="form-control" id="eventDates" name="eventDates" value="<%= dateRange %>">
+    </div>
+    <div class="form-group">
+      <label for="workerRoles">Worker Roles</label>
+      <% workerRoles = ''
+      if (foundEvent.workerRoles.length == 1) {
+        workerRoles = foundEvent.workerRoles[0]
+      } else if (foundEvent.workerRoles.length > 1) {
+        workerRoles = foundEvent.workerRoles.join(", ")
+      }
+      %>
+      <input type="text" class="form-control" id="workerRoles" name="workerRoles" value="<%= workerRoles %>">
+    </div>
+    <div class="form-group">
+      <label for="participantGroups">Participant Groups</label>
+      <% participantGroups = ''
+      if (foundEvent.participantGroups.length == 1) {
+        participantGroups = foundEvent.participantGroups[0]
+      } else if (foundEvent.workerRoles.length > 1) {
+        participantGroups = foundEvent.participantGroups.join(", ")
+      }
+      %>
+      <input type="text" class="form-control" id="participantGroups" name="participantGroups" value="<%= participantGroups %>">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
 

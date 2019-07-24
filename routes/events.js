@@ -60,16 +60,48 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  res.send(`Show information about event with the ID of ${req.params.id}`)
+  Event.findById(req.params.id, (err, foundEvent) => {
+    if (err) {
+      console.log(err);
+      res.send(`Error loading event with ID of ${req.params.id}.`);
+    } else {
+      res.render('events/showEvent', {foundEvent});
+    }
+  })
 });
 
 router.get('/:id/edit', (req, res) => {
-  res.send(`Show form to edit details of event with the ID of ${req.params.id}`)
+  // Get event info from DB
+  Event.findById(req.params.id, (err, foundEvent) => {
+    if (err) {
+      console.log(err);
+      res.send(`Error finding event with ID of ${req.params.id}`)
+    } else {
+      res.render('events/editEvent', {foundEvent})
+    }
+  })
 });
 
 router.put('/:id', (req, res) => {
-  console.log(`Update event with id of ${req.body.eventId}`);
-  res.send(`Update event with id of ${req.params.id}, then redirect to that event's information page`)
+  // Build updated event object
+  updatedEvent = {
+    name: req.body.eventName,
+    description: req.body.eventDescription,
+    imageUrl: req.body.imageUrl,
+    registrationCutoff: req.body.registrationCutoff,
+    workerRoles: req.body.workerRoles.split(","),
+    participantGroups: req.body.participantGroups.split(",")
+  }
+
+  Event.findByIdAndUpdate(req.params.id, updatedEvent, (err, oldEvent) => {
+    if (err) {
+      console.log(err);
+      res.send(`There was a problem updating: ${err}`)
+    } else {
+      console.log(`Updated event with id of ${req.params.id}`);
+      res.redirect(`/events/${req.params.id}`)
+    }
+  })
 });
 
 router.delete('/:id', (req, res) => {
