@@ -19,7 +19,7 @@ const dbSeeds = [
     registrationCutoff: new Date,
     startDate: new Date("August 5 2020"),
     endDate: new Date("August 9 2020"),
-    workerRoles: ["Bus Driver", "Male Chapperone", "Female Chapperone", "Leader"],
+    workerRoles: ["Bus Driver", "Male Chaperone", "Female Chaperone", "Leader"],
     participantGroups: ["1st - 2nd", "3rd - 4th", "5th - 6th"]
   },
   {
