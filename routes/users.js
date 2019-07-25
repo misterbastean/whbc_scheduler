@@ -1,12 +1,13 @@
-const express = require('express'),
-      router  = express.Router(),
-      User    = require('../models/user')
+const express     = require('express'),
+      router      = express.Router(),
+      User        = require('../models/user'),
+      middleware  = require('../utils/middleware')
 
 
 // =====================
 // USERS
 // =====================
-router.get('/', (req, res) => {
+router.get('/', middleware.isAdmin, (req, res) => {
   res.send('Show index of users')
 });
 
@@ -15,7 +16,10 @@ router.get('/new', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const newUser = new User({username: req.body.username});
+  const newUser = new User({
+    username: req.body.username,
+    isAdmin: false
+  });
   User.register(newUser, req.body.password, (err, user) => {
     if (err) {
       console.log(err);

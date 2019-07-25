@@ -20,4 +20,19 @@ middlewareObj.canLogIn = (req, res, next) => {
   }
 }
 
+// Check if user is an admin
+middlewareObj.isAdmin = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    if (req.user.isAdmin) {
+      return next();
+    } else {
+      console.log("Only admins can do that"); // Replace with Flash
+      res.redirect("/events")
+    }
+  } else {
+    console.log("You must login to do that"); // Replace with Flash
+    res.redirect("/login")
+  }
+}
+
 module.exports = middlewareObj;
