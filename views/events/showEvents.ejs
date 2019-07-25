@@ -9,20 +9,33 @@ TODO:
 <body>
 
 <% include ../partials/navbar %>
+
+<% function sameDay(d1, d2) {
+  return d1.getFullYear() === d2.getFullYear() &&
+  d1.getMonth() === d2.getMonth() &&
+  d1.getDate() === d2.getDate()
+} %>
+
 <div class="container">
   <h1>Index of Events</h1>
   <div class="row">
-    <% events.forEach((event) => { %>
+    <% events.forEach((item) => { %>
       <div class="col-md-4">
         <div class="card">
-          <a href="/events/<%= event._id %>">
-            <img class="card-img-top" src="<%= event.imageUrl %>" alt="Event picture">
+          <a href="/events/<%= item._id %>">
+            <img class="card-img-top" src="<%= item.imageUrl %>" alt="Event picture">
           </a>
           <div class="card-body">
-            <h5 class="card-title"><%= event.name %></h5>
-            <h6 class="card-subtitle mb-2 text-muted"><%= event.dates[0].toLocaleDateString("en-US") + " - " + event.dates[event.dates.length-1].toLocaleDateString("en-US") %></h6>
-            <p class="card-text"><%= event.description %></p>
-            <a href="/events/<%= event._id %>" class="btn btn-primary">More Info</a>
+            <h5 class="card-title"><%= item.name %></h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              <% if (!sameDay(item.startDate, item.endDate)) { %>
+                <%= `${item.startDate.toLocaleDateString("en-US")} - ${item.endDate.toLocaleDateString("en-US")}` %>
+              <% } else { %>
+                <%= item.startDate.toLocaleDateString("en-US") %>
+              <% } %>
+            </h6>
+            <p class="card-text"><%= item.description %></p>
+            <a href="/events/<%= item._id %>" class="btn btn-primary">More Info</a>
           </div>
         </div>
       </div>

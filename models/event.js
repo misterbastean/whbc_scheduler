@@ -5,7 +5,8 @@ const eventSchema = new mongoose.Schema({
   description: String,
   imageUrl: String,
   registrationCutoff: Date,
-  dates: [Date],
+  startDate: Date,
+  endDate: Date,
   workerRoles: [String],
   participantGroups: [String]
 });

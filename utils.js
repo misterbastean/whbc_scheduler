@@ -7,7 +7,8 @@ const dbSeeds = [
     description: "A super cool time",
     imageUrl: "https://via.placeholder.com/150",
     registrationCutoff: new Date,
-    dates: [new Date("July 9 2020"), new Date("July 10 2020"), new Date("July 11 2020")],
+    startDate: new Date("July 9 2020"),
+    endDate: new Date("July 15 2020"),
     workerRoles: ["Kitchen", "Registration", "Class Teacher", "Missions"],
     participantGroups: ["Blue", "Green", "Red", "Orange"]
   },
@@ -16,16 +17,18 @@ const dbSeeds = [
     description: "Another awesome trip",
     imageUrl: "https://via.placeholder.com/150",
     registrationCutoff: new Date,
-    dates: [new Date("July 20 2020"), new Date("July 21 2020"), new Date("July 22 2020")],
+    startDate: new Date("August 5 2020"),
+    endDate: new Date("August 9 2020"),
     workerRoles: ["Bus Driver", "Male Chapperone", "Female Chapperone", "Leader"],
     participantGroups: ["1st - 2nd", "3rd - 4th", "5th - 6th"]
   },
   {
-    name: "Another Event",
-    description: "Another amazing time",
+    name: "Christmas Event",
+    description: "Ho ho ho...",
     imageUrl: "https://via.placeholder.com/150",
     registrationCutoff: new Date,
-    dates: [new Date("February 12 2020"), new Date("February 13 2020"), new Date("February 14 2020")],
+    startDate: new Date("December 25 2020"),
+    endDate: new Date("December 25 2020"),
     workerRoles: ["Role 1", "Role 2", "Role 3", "Role 4"],
     participantGroups: ["Giraffes", "Rhinos", "Lions", "Monkeys"]
   }

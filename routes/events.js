@@ -1,3 +1,5 @@
+// WORKING ON POPULATING DATES IN THE DATEPICKER
+
 const express       = require('express'),
       router        = express.Router(),
       Event         = require('../models/event');
@@ -77,7 +79,18 @@ router.get('/:id/edit', (req, res) => {
       console.log(err);
       res.send(`Error finding event with ID of ${req.params.id}`)
     } else {
-      res.render('events/editEvent', {foundEvent})
+      const formattedEvent = {
+        _id: foundEvent._id,
+        name: foundEvent.name,
+        description: foundEvent.description,
+        imageUrl: foundEvent.imageUrl,
+        registrationCutoff: foundEvent.registrationCutoff,
+        startDate: foundEvent.startDate.toLocaleDateString("en-US"),
+        endDate: foundEvent.endDate.toLocaleDateString("en-US"),
+        workerRoles: foundEvent.workerRoles,
+        participantGroups: foundEvent.participantGroups
+      }
+      res.render('events/editEvent', {foundEvent: formattedEvent})
     }
   })
 });
