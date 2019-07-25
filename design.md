@@ -196,3 +196,13 @@ Object representing a participant (i.e. a person attending the event). Currently
     }
   ]
 }
+```
+
+## Navbar Design
+### Links
+1. Skedulr (left) => /
+2. New Event (right) => /events/new
+3. Search Events (search bar with placeholder; right) => /events?search=${searchTerm}
+4. Login (if not logged in, right) => /login
+5. Logout (if logged in, right) => /logout
+6. Profile (username; if logged in; right) => /users/:id
