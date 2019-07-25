@@ -3,8 +3,11 @@ const express               = require('express'),
       mongoose              = require('mongoose'),
       bodyParser            = require('body-parser'),
       methodOverride        = require('method-override'),
+      passport              = require('passport'),
       path                  = require('path'),
-      utils                 = require('./utils')
+      utils                 = require('./utils'),
+      User                  = require('./models/user'),
+      LocalStrategy         = require('passport-local');
 
       // Only import config if working locally
       let config;
@@ -49,6 +52,33 @@ app.use(bodyParser.json());
 
 // Set up view engine
 app.set('view engine', 'ejs');
+
+// Authentication
+try {
+  app.use(require('express-session')({
+    secret: config.session.secret,
+    resave: false,
+    saveUninitialized: false
+  }));
+} catch(e) {
+  app.use(require('express-session')({
+    secret: process.env.ES_SECRET,
+    resave: false,
+    saveUninitialized: false
+  }));
+}
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// Middleware to pass currentUser to each page
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next()
+});
 
 // Serve public folder and views folder
 app.use('/public', express.static(path.join(__dirname + '/public')));

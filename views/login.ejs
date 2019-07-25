@@ -5,10 +5,19 @@
 
 <% include ./partials/navbar %>
 
-<h1>Login Form</h1>
-<form action="/login" method="POST">
-  Form Here
-  <button>Login</button>
-</form>
+<div class="container">
+  <h1 class='mt-3'>Login</h1>
+  <form action="/login" method="POST">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" name='username' placeholder="Enter username" autofocus>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
 
 <% include ./partials/footer %>

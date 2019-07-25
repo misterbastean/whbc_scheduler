@@ -1,5 +1,6 @@
 const express = require('express'),
-      router  = express.Router();
+      router  = express.Router(),
+      User    = require('../models/user')
 
 
 // =====================
@@ -10,11 +11,18 @@ router.get('/', (req, res) => {
 });
 
 router.get('/new', (req, res) => {
-  res.send('Show form to register as a new user')
+  res.render('users/newUser')
 });
 
 router.post('/', (req, res) => {
-  res.send('Create new user, login as that user, then redirect to /events')
+  const newUser = new User({username: req.body.username});
+  User.register(newUser, req.body.password, (err, user) => {
+    if (err) {
+      console.log(err);
+      return res.redirect('back')
+    }
+    res.redirect('/events')
+  })
 });
 
 router.get('/:id', (req, res) => {
