@@ -1,5 +1,5 @@
 const mongoose  = require('mongoose'),
-      Event     = require('./models/event')
+      Event     = require('../models/event')
 
 const dbSeeds = [
   {
@@ -34,25 +34,24 @@ const dbSeeds = [
   }
 ]
 
-const utils = {
-  seedDb: () => {
-    Event.deleteMany({}, (err) => {
+
+const seedDb = () => {
+  Event.deleteMany({}, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Removed events");
+    }
+  });
+  dbSeeds.forEach((item) => {
+    Event.create(item, (err, addedEvent) => {
       if (err) {
         console.log(err);
       } else {
-        console.log("Removed events");
+        console.log("Event added");
       }
-    });
-    dbSeeds.forEach((item) => {
-      Event.create(item, (err, addedEvent) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("Event added");
-        }
-      })
     })
-  }
+  })
 }
 
-module.exports = utils;
+module.exports = seedDb;

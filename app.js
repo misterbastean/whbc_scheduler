@@ -1,3 +1,6 @@
+// Currently Working On:
+// Authentication (just added login, need to work on logout as well as isLoggedIn and isAdmin middleware)
+
 const express               = require('express'),
       app                   = express(),
       mongoose              = require('mongoose'),
@@ -5,7 +8,7 @@ const express               = require('express'),
       methodOverride        = require('method-override'),
       passport              = require('passport'),
       path                  = require('path'),
-      utils                 = require('./utils'),
+      seedDb                 = require('./utils/seedDb'),
       User                  = require('./models/user'),
       LocalStrategy         = require('passport-local');
 
@@ -90,7 +93,7 @@ app.use('/events', eventRoutes);
 app.use('/users', userRoutes);
 
 // Seed DB
-utils.seedDb();
+seedDb();
 
 // Listening
 app.listen(process.env.PORT || 3000, process.env.IP, () => {

@@ -2,7 +2,8 @@
 
 const express       = require('express'),
       router        = express.Router(),
-      Event         = require('../models/event');
+      Event         = require('../models/event'),
+      middleware    = require('../utils/middleware')
 
 // =============================
 // EVENTS
@@ -19,7 +20,7 @@ router.get('/', (req, res) => {
   })
 });
 
-router.get('/new', (req, res) => {
+router.get('/new', middleware.isLoggedIn, (req, res) => {
   res.render("events/newEvent")
 });
 
