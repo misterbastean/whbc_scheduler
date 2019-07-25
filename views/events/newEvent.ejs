@@ -24,14 +24,12 @@
       <input type="text" class="form-control" id="imageUrl" name="imageUrl" placeholder="https://" value="https://via.placeholder.com/150">
     </div>
     <div class="form-group">
-      <label for="registrationCutoff">Registration Cutoff</label> <!-- Need to update to a calendar selector -->
-      <input type="text" class="form-control" id="registrationCutoff" name="registrationCutoff" placeholder="July 4, 2019">
-    </div>
-    <div class="form-group">
-      <label for="startDate">Start Date</label>
+      <label for="startDate" class="mt-2">Start Date</label>
       <input class="form-control" id="startDate" name="startDate" width="276">
-      <label for="endDate">End Date</label>
+      <label for="endDate" class="mt-2">End Date</label>
       <input class="form-control" id="endDate" name="endDate" width="276">
+      <label for="registrationCutoff" class="mt-2">Registration Cutoff</label>
+      <input class="form-control" id="registrationCutoff" name="registrationCutoff" width="276">
     </div>
     <div class="form-group">
       <label for="workerRoles">Worker Roles</label>
@@ -50,6 +48,9 @@
     uiLibrary: 'bootstrap4'
   });
   $('#endDate').datepicker({
+    uiLibrary: 'bootstrap4'
+  });
+  $('#registrationCutoff').datepicker({
     uiLibrary: 'bootstrap4'
   });
 </script>

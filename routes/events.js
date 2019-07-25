@@ -1,4 +1,4 @@
-// WORKING ON POPULATING DATES IN THE DATEPICKER
+// workerRoles and participantGroups are adding an extra space every time event is updated
 
 const express       = require('express'),
       router        = express.Router(),
@@ -34,10 +34,16 @@ router.post('/', (req, res) => {
   }
 
   // Create workerRoles array
-  let workerRoles = req.body.workerRoles.split(",")
+  const workerRoles = req.body.workerRoles.split(",")
+  let workerRolesTrimmed = []
+  workerRoles.forEach((role) => workerRolesTrimmed.push(role.trim()))
+  console.log(workerRolesTrimmed);
 
   // Create participantGroups array
-  let participantGroups = req.body.participantGroups.split(",")
+  const participantGroups = req.body.participantGroups.split(",")
+  let participantGroupsTrimmed = []
+  participantGroups.forEach((role) => participantGroupsTrimmed.push(role.trim()))
+  console.log(participantGroupsTrimmed);
 
   // Create event object
   const newEvent = {
@@ -45,9 +51,10 @@ router.post('/', (req, res) => {
     description: req.body.eventDescription,
     imageUrl,
     registrationCutoff: req.body.registrationCutoff,
-    eventDates: req.body.eventDates,
-    workerRoles,
-    participantGroups
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    workerRolesTrimmed,
+    participantGroupsTrimmed
   }
 
   Event.create(newEvent, (err, addedEvent) => {
@@ -96,7 +103,17 @@ router.get('/:id/edit', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  // Build updated event object
+  // Trim whitespace from workerRoles and participantGroups and push to array
+  const workerRoles = req.body.workerRoles.split(",")
+  let workerRolesTrimmed = []
+  workerRoles.forEach((role) => workerRolesTrimmed.push(role.trim()))
+  console.log(workerRolesTrimmed);
+
+  const participantGroups = req.body.participantGroups.split(",")
+  let participantGroupsTrimmed = []
+  participantGroups.forEach((role) => participantGroupsTrimmed.push(role.trim()))
+  console.log(participantGroupsTrimmed);
+
   updatedEvent = {
     name: req.body.eventName,
     description: req.body.eventDescription,
@@ -104,9 +121,10 @@ router.put('/:id', (req, res) => {
     registrationCutoff: req.body.registrationCutoff,
     startDate: req.body.startDate,
     endDate: req.body.endDate,
-    workerRoles: req.body.workerRoles.split(","),
-    participantGroups: req.body.participantGroups.split(",")
+    workerRoles: workerRolesTrimmed,
+    participantGroups: participantGroupsTrimmed
   }
+  console.log(updatedEvent.workerRoles);
 
   Event.findByIdAndUpdate(req.params.id, updatedEvent, (err, oldEvent) => {
     if (err) {
