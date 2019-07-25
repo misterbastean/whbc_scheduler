@@ -102,6 +102,8 @@ router.put('/:id', (req, res) => {
     description: req.body.eventDescription,
     imageUrl: req.body.imageUrl,
     registrationCutoff: req.body.registrationCutoff,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
     workerRoles: req.body.workerRoles.split(","),
     participantGroups: req.body.participantGroups.split(",")
   }
