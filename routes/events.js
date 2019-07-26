@@ -1,5 +1,3 @@
-// workerRoles and participantGroups are adding an extra space every time event is updated
-
 const express       = require('express'),
       router        = express.Router(),
       Event         = require('../models/event'),
@@ -38,13 +36,11 @@ router.post('/', (req, res) => {
   const workerRoles = req.body.workerRoles.split(",")
   let workerRolesTrimmed = []
   workerRoles.forEach((role) => workerRolesTrimmed.push(role.trim()))
-  console.log(workerRolesTrimmed);
 
   // Create participantGroups array
   const participantGroups = req.body.participantGroups.split(",")
   let participantGroupsTrimmed = []
   participantGroups.forEach((role) => participantGroupsTrimmed.push(role.trim()))
-  console.log(participantGroupsTrimmed);
 
   // Create event object
   const newEvent = {
@@ -54,8 +50,12 @@ router.post('/', (req, res) => {
     registrationCutoff: req.body.registrationCutoff,
     startDate: req.body.startDate,
     endDate: req.body.endDate,
-    workerRolesTrimmed,
-    participantGroupsTrimmed
+    workerRoles: workerRolesTrimmed,
+    participantGroups: participantGroupsTrimmed,
+    owner: {
+      id: req.user._id,
+      username: req.user.username
+    }
   }
 
   Event.create(newEvent, (err, addedEvent) => {
@@ -80,7 +80,7 @@ router.get('/:id', (req, res) => {
   })
 });
 
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', middleware.checkEventOwnership, (req, res) => {
   // Get event info from DB
   Event.findById(req.params.id, (err, foundEvent) => {
     if (err) {
@@ -103,7 +103,7 @@ router.get('/:id/edit', (req, res) => {
   })
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', middleware.checkEventOwnership, (req, res) => {
   // Trim whitespace from workerRoles and participantGroups and push to array
   const workerRoles = req.body.workerRoles.split(",")
   let workerRolesTrimmed = []
