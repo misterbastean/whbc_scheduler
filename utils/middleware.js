@@ -38,10 +38,8 @@ middlewareObj.isAdmin = (req, res, next) => {
 
 // Check if user owns an event
 middlewareObj.checkEventOwnership = (req, res, next) => {
-  console.log("check 0");
   // Check if user is logged in
   if (req.isAuthenticated()) {
-    console.log("check 1");
     // Find the event from the DB
     Event.findById(req.params.id, (err, foundEvent) => {
       if (err || !foundEvent) {
@@ -49,9 +47,7 @@ middlewareObj.checkEventOwnership = (req, res, next) => {
         res.redirect(back)
       } else {
         // Does the user own the event?
-        console.log("check 2");
         if (foundEvent.owner.id.equals(req.user._id)) {
-          console.log("check 3");
           next();
         } else {
           console.log("You don't have permission to do that");

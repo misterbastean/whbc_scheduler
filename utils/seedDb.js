@@ -10,7 +10,10 @@ const dbSeeds = [
     startDate: new Date("July 9 2020"),
     endDate: new Date("July 15 2020"),
     workerRoles: ["Kitchen", "Registration", "Class Teacher", "Missions"],
-    participantGroups: ["Blue", "Green", "Red", "Orange"]
+    participantGroups: ["Blue", "Green", "Red", "Orange"],
+    owner: {
+      id: "5d39f81fd0b4cb775333fb94"
+    }
   },
   {
     name: "Summer Camp",
@@ -20,7 +23,10 @@ const dbSeeds = [
     startDate: new Date("August 5 2020"),
     endDate: new Date("August 9 2020"),
     workerRoles: ["Bus Driver", "Male Chaperone", "Female Chaperone", "Leader"],
-    participantGroups: ["1st - 2nd", "3rd - 4th", "5th - 6th"]
+    participantGroups: ["1st - 2nd", "3rd - 4th", "5th - 6th"],
+    owner: {
+      id: "5d39f81fd0b4cb775333fb94"
+    }
   },
   {
     name: "Christmas Event",
@@ -30,7 +36,10 @@ const dbSeeds = [
     startDate: new Date("December 25 2020"),
     endDate: new Date("December 25 2020"),
     workerRoles: ["Role 1", "Role 2", "Role 3", "Role 4"],
-    participantGroups: ["Giraffes", "Rhinos", "Lions", "Monkeys"]
+    participantGroups: ["Giraffes", "Rhinos", "Lions", "Monkeys"],
+    owner: {
+      id: "5d39f8b4d0b4cb775333fb95"
+    }
   }
 ]
 
