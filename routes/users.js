@@ -16,17 +16,27 @@ router.get('/new', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const newUser = new User({
-    username: req.body.username,
-    isAdmin: false
-  });
-  User.register(newUser, req.body.password, (err, user) => {
-    if (err) {
-      console.log(err);
-      return res.redirect('back')
-    }
-    res.redirect('/events')
-  })
+  if (req.body.password != req.body.passwordVerify) {
+    console.log("Passwords don't match");
+    res.redirect("back");
+  } else {
+    const newUser = new User({
+      username: req.body.username,
+      phone: req.body.phone,
+      email: req.body.email,
+      isAdmin: false,
+      isSuperuser: false
+    });
+
+    User.register(newUser, req.body.password, (err, user) => {
+      if (err) {
+        console.log(err);
+        res.redirect('back')
+      } else {
+        res.redirect('/events')
+      }
+    })
+  }
 });
 
 router.get('/:id', middleware.checkUserOwnership, (req, res) => {

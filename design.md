@@ -74,7 +74,6 @@ Start off at landing page with banner at top to login as user, but shows index o
 Object representing an event. image_url should include "http[s]://"
 ```javascript
 {  
-  _id: String,  
   name: String,  
   description: String,  
   imageUrl: String,  
@@ -100,14 +99,13 @@ Password item is a hashed string. Consider implementing Google SSO.
 
 ```javascript
 {  
-  _id: String,
   username: String,
-  password: String,
-  events: [Event],
   email: String,
   phone: String,
-  is_admin: Boolean,
-  is_superuser: Boolean
+  isAdmin: Boolean,
+  isSuperuser: Boolean,
+  salt: String,
+  hash: String
 }
 ```
 
@@ -116,7 +114,6 @@ Object representing a worker, such as a volunteer, teacher, group leader, etc. C
 
 ```javascript
 {  
-  _id: String,  
   first_name: String,  
   last_name: String,  
   gender: String,  
@@ -152,7 +149,6 @@ Object representing a participant (i.e. a person attending the event). Currently
 
 ```javascript
 {
-  _id: String,
   first_name: String,  
   last_name: String,  
   gender: String,  
