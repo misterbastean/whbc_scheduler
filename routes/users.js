@@ -40,7 +40,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:id', middleware.checkUserOwnership, (req, res) => {
-  res.send(`Show information page for user ID ${req.params.id}`)
+  res.render("users/userProfile")
 });
 
 router.get('/:id/edit', (req, res) => {
