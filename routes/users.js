@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
   })
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', middleware.checkUserOwnership, (req, res) => {
   res.send(`Show information page for user ID ${req.params.id}`)
 });
 

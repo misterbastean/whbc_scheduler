@@ -1,5 +1,6 @@
 let middlewareObj = {};
-const Event       = require('../models/event')
+const Event       = require('../models/event'),
+      User        = require('../models/user')
 
 // Check if user is logged in; redirect if not
 middlewareObj.isLoggedIn = (req, res, next) => {
@@ -43,7 +44,7 @@ middlewareObj.checkEventOwnership = (req, res, next) => {
     // Find the event from the DB
     Event.findById(req.params.id, (err, foundEvent) => {
       if (err || !foundEvent) {
-        console.log("Comment not found");
+        console.log("Event not found");
         res.redirect(back)
       } else {
         // Does the user own the event?
@@ -59,10 +60,34 @@ middlewareObj.checkEventOwnership = (req, res, next) => {
     console.log("You need to be logged in to do that");
     res.redirect("back");
   }
-
 }
 
+
 // Check if user owns a user profile
+middlewareObj.checkUserOwnership = (req, res, next) => {
+  // Check if user is logged in
+  if (req.isAuthenticated()) {
+    // Find the user from the DB
+    User.findById(req.params.id, (err, foundUser) => {
+      if (err || !foundUser) {
+        console.log("User not found");
+        res.redirect("back")
+      } else {
+        // Is the current user an admin or does the current user own the requested user page?
+        if (req.user.isAdmin || foundUser._id.equals(req.user._id)) {
+          next();
+        } else {
+          console.log("You don't have permission to do that");
+          res.redirect('back')
+        }
+      }
+    })
+  } else {
+    console.log("You need to be logged in to do that");
+    res.redirect("back");
+  }
+}
+
 
 // Check if user owns a worker
 
