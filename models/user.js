@@ -7,7 +7,19 @@ const UserSchema = new mongoose.Schema({
   email: String,
   phone: String,
   isAdmin: Boolean,
-  isSuperuser: Boolean
+  isSuperuser: Boolean,
+  workers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Worker"
+    }
+  ],
+  participants: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Participant"
+    }
+  ]
 });
 
 UserSchema.plugin(passportLocalMongoose);

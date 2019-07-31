@@ -89,13 +89,13 @@ Object representing an event. image_url should include "http[s]://"
 ```
 
 ### User
-Object representing a user of the web app. Normal Users are used for authentication and authorization, and can have multiple Workers and/or Participants linked to their account. The purpose is to allow one person (e.g. a parent) to create and manage multiple Workers and/or Participants.
+Object representing a user of the web app. Normal Users are used for authentication and authorization, and can CRUD multiple Workers and/or Participants that they create. The purpose is to allow one person (e.g. a parent) to create and manage multiple Workers and/or Participants.
 
-Admin Users are able to create events, as well as read, edit, and delete events they created. They can also read and edit their own profile.
+Admin Users are able to create events, as well as read, edit, and delete events they created. They have full CRUD for all workers and participants. They can also read and edit their own profile.
 
-Superusers are able to CRUD all admins, users, and events.
+Superusers are able to CRUD all admins, users, events, workers, and participants.
 
-Password item is a hashed string. Consider implementing Google SSO.
+Consider implementing Google SSO.
 
 ```javascript
 {  
@@ -114,33 +114,25 @@ Object representing a worker, such as a volunteer, teacher, group leader, etc. C
 
 ```javascript
 {  
-  first_name: String,  
-  last_name: String,  
+  firstName: String,  
+  lastName: String,  
   gender: String,  
   dob: Date,  
   address: String,  
   city: String,  
   state: String,  
   zip: String,  
-  phone: String, // 555-555-5555
+  phone: String, // 5555555555
   email: String,  
-  emergency_contacts: [
+  emergencyContacts: [
     {
       name: String,  
-      phone: String, // 555-555-5555  
+      phone: String, // 5555555555  
       relationship: String  
     }
   ],  
   shirt_size: String,  
   comments: String,  
-  events: [  
-    {  
-      id: String,  
-      role: [String],  
-      group: [String],  
-      completed_paperwork: Boolean  
-    }
-  ]
 }
 ```
 
@@ -149,54 +141,36 @@ Object representing a participant (i.e. a person attending the event). Currently
 
 ```javascript
 {
-  first_name: String,  
-  last_name: String,  
+  firstName: String,  
+  lastName: String,  
   gender: String,  
   dob: Date,  
-  medical: String,  
-  is_adult: Boolean,  
+  medical: String,
   address: String,  
   city: String,  
   state: String,  
   zip: String,  
-  phone: String, // 555-555-5555  
+  phone: String, // 5555555555  
   email: String,  
   allergies: [String],  
-  emergency_contacts: [
+  emergencyContacts: [
     {
       name: String,  
-      phone: String, // 555-555-5555  
+      phone: String, // 5555555555  
       relationship: String  
     }
   ],  
-  authorized_pickups: [
+  authorizedPickups: [
     {
       name: String,  
-      phone: String // 555-555-5555
+      phone: String // 5555555555
     }
   ],
-  shirt_size: String,  
-  church_member: Boolean,  
+  shirtSize: String,  
+  churchMember: Boolean,  
   church: String,  
-  photo_permission: Boolean,  
-  photo_publication: Boolean,  
-  comments: String,  
-  events: [  
-    {  
-      id: String,  
-      role: [String],  
-      group: [String],
-      completed_paperwork: Boolean   
-    }
-  ]
+  photoPermission: Boolean,  
+  photoPublication: Boolean,  
+  comments: String
 }
 ```
-
-## Navbar Design
-### Links
-1. Skedulr (left) => /
-2. New Event (right) => /events/new
-3. Search Events (search bar with placeholder; right) => /events?search=${searchTerm}
-4. Login (if not logged in, right) => /login
-5. Logout (if logged in, right) => /logout
-6. Profile (username; if logged in; right) => /users/:id
