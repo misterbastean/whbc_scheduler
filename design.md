@@ -81,10 +81,14 @@ Object representing an event. image_url should include "http[s]://"
   registrationCutoff: Date,  
   startDate: Date,
   endDate: Date,  
-  workerRoles: [String],  
-  participantGroups: [String],  
-  workers: [Worker],  
-  participants: [Participant]  
+  workerRoles: [{
+    name: String,
+    workers: [Worker]
+  }],  
+  participantGroups: [{
+    name: String,
+    participants: [Participant]
+  }]
 }
 ```
 
