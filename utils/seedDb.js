@@ -44,58 +44,58 @@ const dbEventSeeds = [
 ]
 
 const dbWorkerSeeds = [
-    {
-      firstName: "Johnny",
-      lastName: "Bravo",
-      gender: "Male",
-      dob: new Date("January 1, 1980"),
-      address: "123 Cartoon St.",
-      city: "Cartoon Network",
-      state: "NY",
-      zip: "12345",
-      phone: "123-456-7890",
-      email: "johnny@bravo.com",
-      emergencyContacts: [
-        {
-          name: "Heeeeey",
-          phone: "333-333-3333",
-          relationship: "Pretty Mama"
-        },
-        {
-          name: "Alvin the Chipmunk",
-          phone: "567-567-5678",
-          relationship: "Pet"
-        }
-      ],
-      shirtSize: "XXL",
-      comments: "Here be my comments."
-    },
-    {
-      firstName: "Sabetha",
-      lastName: "Lynch",
-      gender: "Female",
-      dob: new Date("January 1, 1991"),
-      address: "Shades Hill",
-      city: "Camoor",
-      state: "Therin",
-      zip: "42424",
-      phone: "321-543-6547",
-      email: "sabetha@gb.com",
-      emergencyContacts: [
-        {
-          name: "Locke Lamora",
-          phone: "777-777-7777",
-          relationship: "It's Complicated"
-        },
-        {
-          name: "Jean Tannen",
-          phone: "654-623-8376",
-          relationship: "Friend"
-        }
-      ],
-      shirtSize: "M",
-      comments: "More comments here."
-    }
+  {
+    firstName: "Johnny",
+    lastName: "Bravo",
+    gender: "Male",
+    dob: new Date("January 1, 1980"),
+    address: "123 Cartoon St.",
+    city: "Cartoon Network",
+    state: "NY",
+    zip: "12345",
+    phone: "123-456-7890",
+    email: "johnny@bravo.com",
+    emergencyContacts: [
+      {
+        name: "Heeeeey",
+        phone: "333-333-3333",
+        relationship: "Pretty Mama"
+      },
+      {
+        name: "Alvin the Chipmunk",
+        phone: "567-567-5678",
+        relationship: "Pet"
+      }
+    ],
+    shirtSize: "XXL",
+    comments: "Here be my comments."
+  },
+  {
+    firstName: "Sabetha",
+    lastName: "Lynch",
+    gender: "Female",
+    dob: new Date("January 1, 1991"),
+    address: "Shades Hill",
+    city: "Camoor",
+    state: "Therin",
+    zip: "42424",
+    phone: "321-543-6547",
+    email: "sabetha@gb.com",
+    emergencyContacts: [
+      {
+        name: "Locke Lamora",
+        phone: "777-777-7777",
+        relationship: "It's Complicated"
+      },
+      {
+        name: "Jean Tannen",
+        phone: "654-623-8376",
+        relationship: "Friend"
+      }
+    ],
+    shirtSize: "M",
+    comments: "More comments here."
+  }
 ]
 
 
