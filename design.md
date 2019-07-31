@@ -104,6 +104,18 @@ Consider implementing Google SSO.
   phone: String,
   isAdmin: Boolean,
   isSuperuser: Boolean,
+  workers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Worker"
+    }
+  ],
+  participants: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Participant"
+    }
+  ],
   salt: String,
   hash: String
 }
@@ -131,7 +143,7 @@ Object representing a worker, such as a volunteer, teacher, group leader, etc. C
       relationship: String  
     }
   ],  
-  shirt_size: String,  
+  shirtSize: String,  
   comments: String,  
 }
 ```

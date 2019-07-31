@@ -1,4 +1,4 @@
-- Created Worker model. Created model, but have not implemented or tested in any way
+- Create Worker route. Need to test further to make sure it works, then need to get rid of edge cases/formatting (e.g. phone number format, etc.).
 
 
 Small Stuff:

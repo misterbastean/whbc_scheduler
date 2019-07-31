@@ -1,6 +1,7 @@
 const express     = require('express'),
       router      = express.Router(),
       User        = require('../models/user'),
+      Worker      = require('../models/worker'),
       middleware  = require('../utils/middleware')
 
 
@@ -67,8 +68,52 @@ router.get('/:id/workers/new', (req, res) => {
   res.render("workers/newWorker")
 });
 
-router.post('/:id/workers', (req, res) => {
-  res.send(`Create new worker associated with user ID ${req.params.id}`)
+router.post('/:id/workers', (req, res) => { // Need to add middleware to authorize
+  // Lookup User using ID
+  User.findById(req.params.id, (err, foundUser) => {
+    if (err) {
+      console.log(err);
+      res.redirect('back')
+    } else {
+      // Create new worker object
+      const newWorker = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        gender: req.body.gender,
+        dob: req.body.dob,
+        address: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        zip: req.body.zip,
+        phone: req.body.phone,
+        email: req.body.email,
+        emergencyContacts: req.body.emergencyContacts,
+        shirtSize: req.body.shirtSize,
+        comments: req.body.comments
+      }
+      // Add new worker to database
+      Worker.create(newWorker, (err, addedWorker) => {
+        if (err) {
+          console.log(err);
+          res.redirect('back');
+        } else {
+          // Add user to worker
+          addedWorker.user.id = req.user._id;
+          addedWorker.user.username = req.user.username
+          addedWorker.save();
+
+          // add worker to User
+          foundUser.workers.push(addedWorker);
+          foundUser.save()
+          console.log('Added new worker to User!');
+          console.log(newWorker);
+
+          // Redirect back to user profile page
+          res.redirect(`/users/${req.user._id}`)
+        }
+      })
+    }
+  })
 });
 
 router.get('/:id/workers/:wid', (req, res) => {
