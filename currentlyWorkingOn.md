@@ -1,3 +1,4 @@
+- Created Worker model. Created model, but have not implemented or tested in any way
 
 
 Small Stuff:

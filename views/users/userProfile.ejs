@@ -27,10 +27,11 @@
       <!-- Repeat for each worker -->
       <div class="d-flex justify-content-between mt-3 mb-3">
         <h4>First Last</h4>
-        <a class="btn btn-success"href="#">Edit</a>
+        <a class="btn btn-success"href="/users/<%= currentUser._id %>/workers/wid">Edit</a>
       </div>
 
     </div>
+    <a href="/users/<%= currentUser._id %>/workers/new">Add Worker</a>
   </div>
 
 </div>

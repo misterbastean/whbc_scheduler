@@ -48,7 +48,7 @@ Start off at landing page with banner at top to login as user, but shows index o
 #### Workers
 | Name                 | Method  | Endpoint
 |----------------------|---------|----------
-|Worker Index          | GET     | /users/:id/workers
+|Worker Index (remove?)| GET     | /users/:id/workers
 |New Worker Form       | GET     | /users/:id/workers/new
 |Create Worker         | POST    | /users/:id/workers
 |Show Worker           | GET     | /users/:id/workers/:wid

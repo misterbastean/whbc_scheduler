@@ -59,12 +59,12 @@ router.delete('/:id', (req, res) => {
 // =====================
 // WORKERS
 // =====================
-router.get('/:id/workers', (req, res) => {
+router.get('/:id/workers', (req, res) => { // REMOVE THIS ROUTE?
   res.send(`Show index of all workers associated with user ID ${req.params.id}`)
 });
 
 router.get('/:id/workers/new', (req, res) => {
-  res.send(`Show form to create new worker associated with user ID ${req.params.id}`)
+  res.render("workers/newWorker")
 });
 
 router.post('/:id/workers', (req, res) => {
