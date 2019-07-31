@@ -98,8 +98,7 @@ router.post('/:id/workers', (req, res) => { // Need to add middleware to authori
           res.redirect('back');
         } else {
           // Add user to worker
-          addedWorker.user.id = req.user._id;
-          addedWorker.user.username = req.user.username
+          addedWorker.user = req.user.username
           addedWorker.save();
 
           // add worker to User
