@@ -20,13 +20,7 @@ const workerSchema = new mongoose.Schema({
   ],
   shirtSize: String,
   comments: String,
-  user: {
-    id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
-    },
-    username: String
-  }
+  user: String
 });
 
 module.exports = mongoose.model('Worker', workerSchema);
