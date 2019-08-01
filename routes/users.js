@@ -41,7 +41,21 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:id', middleware.checkUserOwnership, (req, res) => {
-  res.render("users/userProfile")
+  var userParams = {
+    workers: [],
+    participants: []
+  }
+
+  Worker.find({user: req.user.username}, (err, foundWorkers) => {
+    if (err) {
+      console.log(err);
+    } else {
+      foundWorkers.forEach((worker) => {
+        userParams.workers.push(worker)
+      })
+      res.render("users/userProfile", {userParams})
+    }
+  })
 });
 
 router.get('/:id/edit', (req, res) => {

@@ -4,7 +4,6 @@
 <body>
 
 <% include ../partials/navbar %>
-
 <div class="container">
   <div class="row mt-5 border-bottom">
     <div class="col-md-3 pl-0">
@@ -24,11 +23,19 @@
       <h6 class="mt-1 font-weight-light"><%= currentUser.phone %></h6>
     </div>
     <div class="col-md-9 p-2 d-flex flex-column justify-content-center">
-      <!-- Repeat for each worker -->
-      <div class="d-flex justify-content-between mt-3 mb-3">
-        <h4>First Last</h4>
-        <a class="btn btn-success"href="/users/<%= currentUser._id %>/workers/wid">Edit</a>
-      </div>
+      <% if (userParams.workers.length > 0) { %>
+        <% userParams.workers.forEach((worker) => { %>
+          <!-- Repeat for each worker -->
+          <div class="d-flex justify-content-between mt-3 mb-3">
+            <h4><%= worker.firstName %> <%= worker.lastName %></h4>
+            <a class="btn btn-success"href="/users/<%= currentUser._id %>/workers/<%= worker._id %>">Edit</a>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="d-flex justify-content-center mt-3 mb-3">
+          <h4>No workers</h4>
+        </div>
+      <% } %>
 
     </div>
     <a href="/users/<%= currentUser._id %>/workers/new">Add Worker</a>
