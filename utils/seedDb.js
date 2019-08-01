@@ -1,5 +1,7 @@
 const mongoose  = require('mongoose'),
-      Event     = require('../models/event')
+      Event     = require('../models/event'),
+      Worker    = require('../models/worker'),
+      User      = require('../models/user')
 
 const dbEventSeeds = [
   {
@@ -68,11 +70,12 @@ const dbWorkerSeeds = [
       }
     ],
     shirtSize: "XXL",
-    comments: "Here be my comments."
+    comments: "Here be my comments.",
+    user: "jbastean"
   },
   {
     firstName: "Sabetha",
-    lastName: "Lynch",
+    lastName: "Belacoros",
     gender: "Female",
     dob: new Date("January 1, 1991"),
     address: "Shades Hill",
@@ -94,7 +97,8 @@ const dbWorkerSeeds = [
       }
     ],
     shirtSize: "M",
-    comments: "More comments here."
+    comments: "More comments here.",
+    user: "jbastean"
   }
 ]
 
@@ -119,7 +123,39 @@ const seedDb = () => {
     })
   });
 
-  // Delete all workers, then create new
+  // Delete all workers
+  Worker.deleteMany({}, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Removed worker documents");
+    }
+  });
+
+  User.findOneAndUpdate({_id: "5d39f81fd0b4cb775333fb94"}, {workers: []}, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Removed workers from jbastean user");
+    }
+  }).then(
+    dbWorkerSeeds.forEach((item) => {
+      Worker.create(item, (err, addedWorker) => {
+        if (err) {
+          console.log(err);
+        } else {
+          User.findOneAndUpdate({_id: "5d39f81fd0b4cb775333fb94"}, { $push: {workers: addedWorker}}, (err) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("Added worker");
+            }
+          })
+
+        }
+      })
+    })
+  )
 }
 
 module.exports = seedDb;

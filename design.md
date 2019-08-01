@@ -148,7 +148,8 @@ Object representing a worker, such as a volunteer, teacher, group leader, etc. C
     }
   ],  
   shirtSize: String,  
-  comments: String,  
+  comments: String,
+  user: String  
 }
 ```
 
@@ -187,6 +188,7 @@ Object representing a participant (i.e. a person attending the event). Currently
   church: String,  
   photoPermission: Boolean,  
   photoPublication: Boolean,  
-  comments: String
+  comments: String,
+  user: String
 }
 ```
