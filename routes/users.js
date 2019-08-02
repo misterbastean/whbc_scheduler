@@ -2,6 +2,7 @@ const express     = require('express'),
       router      = express.Router(),
       User        = require('../models/user'),
       Worker      = require('../models/worker'),
+      Participant = require('../models/participant'),
       middleware  = require('../utils/middleware')
 
 
@@ -103,7 +104,8 @@ router.post('/:id/workers', (req, res) => { // Need to add middleware to authori
         email: req.body.email,
         emergencyContacts: req.body.emergencyContacts,
         shirtSize: req.body.shirtSize,
-        comments: req.body.comments
+        comments: req.body.comments,
+        user: req.user.username
       }
       // Add new worker to database
       Worker.create(newWorker, (err, addedWorker) => {
@@ -111,10 +113,6 @@ router.post('/:id/workers', (req, res) => { // Need to add middleware to authori
           console.log(err);
           res.redirect('back');
         } else {
-          // Add user to worker
-          addedWorker.user = req.user.username
-          addedWorker.save();
-
           // add worker to User
           foundUser.workers.push(addedWorker);
           foundUser.save()
@@ -188,7 +186,68 @@ router.get('/:id/participants/new', (req, res) => {
 });
 
 router.post('/:id/participants', (req, res) => {
-  res.send(`Create new participant associated with user ID ${req.params.id}`)
+  User.findById(req.params.id, (err, foundUser) => {
+    if (err) {
+      console.log(err);
+      res.redirect('back')
+    } else {
+      // Create new participant object
+      let newParticipant = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        gender: req.body.gender,
+        dob: req.body.dob,
+        medical: req.body.medical,
+        address: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        zip: req.body.zip,
+        phone: req.body.phone.replace(/-/g, "").replace(/\s/g, ""),
+        email: req.body.email,
+        emergencyContacts: [],
+        authorizedPickups: [],
+        shirtSize: req.body.shirtSize,
+        churchMember: req.body.churchMember,
+        church: req.body.church,
+        photoPermission: req.body.photoPermission,
+        photoPublication: req.body.photoPublication,
+        comments: req.body.comments,
+        user: req.user.username
+      }
+
+      // Format emergency contacts
+      req.body.emergencyContacts.forEach((contact) => {
+        newParticipant.emergencyContacts.push({
+          name: contact.name,
+          phone: contact.phone.replace(/-/g, "").replace(/\s/g, ""),
+          relationship: contact.relationship
+        })
+      })
+
+      // Format authorized pickups
+      req.body.authorizedPickups.forEach((pickup) => {
+        newParticipant.authorizedPickups.push({
+          name: pickup.name,
+          phone: pickup.phone.replace(/-/g, "").replace(/\s/g, "")
+        })
+      })
+
+      // Add Participant to Databaser
+      Participant.create(newParticipant, (err, createdWorker) => {
+        if (err) {
+          console.log(err);
+          res.redirect("back")
+        } else {
+          // Push Participant to User.participants
+          foundUser.participants.push(createdWorker);
+          foundUser.save();
+          console.log(`Added new participant to ${foundUser.username}!`);
+          console.log(createdWorker);
+          res.redirect(`/users/${req.user._id}`)
+        }
+      })
+    }
+  })
 });
 
 router.get('/:id/participants/:pid', (req, res) => {
