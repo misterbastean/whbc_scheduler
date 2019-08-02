@@ -22,7 +22,10 @@
       <h6 class="mt-2 font-weight-light"><%= currentUser.email %></h6>
       <h6 class="mt-1 font-weight-light"><%= currentUser.phone %></h6>
     </div>
+
+    
     <div class="col-md-9 p-2 d-flex flex-column justify-content-center">
+      <!-- Worker Section -->
       <% if (userParams.workers.length > 0) { %>
         <% userParams.workers.forEach((worker) => { %>
           <!-- Repeat for each worker -->
@@ -37,8 +40,27 @@
         </div>
       <% } %>
 
+    <!-- End Worker Section -->
+
+    <!-- Participant Section -->
+      <% if (userParams.participants.length > 0) { %>
+        <% userParams.participants.forEach((participant) => { %>
+          <!-- Repeat for each participant -->
+          <div class="d-flex justify-content-between mt-3 mb-3">
+            <h4><%= participant.firstName %> <%= participant.lastName %></h4>
+            <a class="btn btn-success"href="/users/<%= currentUser._id %>/participants/<%= participant._id %>">Edit</a>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="d-flex justify-content-center mt-3 mb-3">
+          <h4>No participants</h4>
+        </div>
+      <% } %>
+    <!-- End Participant Section -->
     </div>
+
     <a href="/users/<%= currentUser._id %>/workers/new">Add Worker</a>
+    <a href="/users/<%= currentUser._id %>/participants/new">Add Participant</a>
   </div>
 
 </div>

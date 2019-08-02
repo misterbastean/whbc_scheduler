@@ -50,11 +50,22 @@ router.get('/:id', middleware.checkUserOwnership, (req, res) => {
   Worker.find({user: req.user.username}, (err, foundWorkers) => {
     if (err) {
       console.log(err);
+      res.redirect("back")
     } else {
       foundWorkers.forEach((worker) => {
         userParams.workers.push(worker)
       })
-      res.render("users/userProfile", {userParams})
+      Participant.find({user: req.user.username}, (err, foundParticipants) => {
+        if (err) {
+          console.log(err);
+          res.redirect("back")
+        } else {
+          foundParticipants.forEach((participant) => {
+            userParams.participants.push(participant)
+          })
+        }
+        res.render("users/userProfile", {userParams})
+      })
     }
   })
 });
@@ -251,11 +262,14 @@ router.post('/:id/participants', (req, res) => {
 });
 
 router.get('/:id/participants/:pid', (req, res) => {
-  res.send(`Get information about participant ID ${req.params.pid}, who is associated with user ID ${req.params.id}`)
-});
-
-router.get('/:id/participants/:pid/edit', (req, res) => {
-  res.send(`Show edit form for participant ID ${req.params.pid}, who is associated with user ID ${req.params.id}`)
+  Participant.findById(req.params.pid, (err, foundParticipant) => {
+    if (err) {
+      console.log(err);
+      res.redirect("back");
+    } else {
+      res.render("participants/editParticipant", foundParticipant)
+    }
+  })
 });
 
 router.put('/:id/participants/:pid', (req, res) => {
