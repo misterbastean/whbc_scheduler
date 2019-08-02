@@ -6,7 +6,6 @@ const participantSchema = new mongoose.Schema({
   gender: String,
   dob: Date,
   medical: String,
-  allergies: [String],
   address: String,
   city: String,
   state: String,

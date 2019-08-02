@@ -164,7 +164,6 @@ Object representing a participant (i.e. a person attending the event). Currently
   gender: String,  
   dob: Date,  
   medical: String,
-  allergies: [String],
   address: String,  
   city: String,  
   state: String,  
