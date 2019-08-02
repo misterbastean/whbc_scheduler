@@ -1,4 +1,4 @@
-- New Participant form, then need to do the route, followed by the edit form and route.
+- New Participant edit form and route.
 
 Important Later:
 - Implement Mongoose remove middleware to remove workers/participants associated with a user when the user is removed: https://stackoverflow.com/a/14349259

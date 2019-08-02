@@ -1,7 +1,8 @@
-const mongoose  = require('mongoose'),
-      Event     = require('../models/event'),
-      Worker    = require('../models/worker'),
-      User      = require('../models/user')
+const mongoose    = require('mongoose'),
+      Event       = require('../models/event'),
+      Worker      = require('../models/worker'),
+      Participant = require('../models/participant'),
+      User        = require('../models/user')
 
 const dbEventSeeds = [
   {
@@ -102,6 +103,72 @@ const dbWorkerSeeds = [
   }
 ]
 
+const dbParticipantSeeds = [
+  {
+    firstName: "Johnny",
+    lastName: "Bravo",
+    gender: "Male",
+    dob: new Date("January 1, 1980"),
+    medical: "Peanut allergy",
+    address: "123 Cartoon St.",
+    city: "Cartoon Network",
+    state: "NY",
+    zip: "12345",
+    phone: "1234567890",
+    email: "johnny@bravo.com",
+    emergencyContacts: [
+      {
+        name: "Heeeeey",
+        phone: "3333333333",
+        relationship: "Pretty Mama"
+      },
+      {
+        name: "Alvin the Chipmunk",
+        phone: "5675675678",
+        relationship: "Pet"
+      }
+    ],
+    shirtSize: "XXL",
+    churchMember: true,
+    church: "West Hartsville",
+    photoPermission: true,
+    photoPublication: true,
+    comments: "Here be my comments.",
+    user: "jbastean"
+  },
+  {
+    firstName: "Sabetha",
+    lastName: "Belacoros",
+    gender: "Female",
+    dob: new Date("January 1, 1991"),
+    medical: "",
+    address: "Shades Hill",
+    city: "Camoor",
+    state: "Therin",
+    zip: "42424",
+    phone: "3215436547",
+    email: "sabetha@gb.com",
+    emergencyContacts: [
+      {
+        name: "Locke Lamora",
+        phone: "7777777777",
+        relationship: "It's Complicated"
+      },
+      {
+        name: "Jean Tannen",
+        phone: "6546238376",
+        relationship: "Friend"
+      }
+    ],
+    shirtSize: "M",
+    churchMember: false,
+    church: "",
+    photoPermission: false,
+    photoPublication: false,
+    comments: "More comments here.",
+    user: "jbastean"
+  }
+]
 
 
 const seedDb = () => {
@@ -122,7 +189,7 @@ const seedDb = () => {
     })
   });
   console.log("Created events");
-
+  // Create workers
   // ENTERING CALLBACK HELL - BEWARE ALL YE WHO ENTER HERE
   Worker.deleteMany({}, (err) => {
     if (err) {
@@ -152,6 +219,36 @@ const seedDb = () => {
       })
     }
   });
+
+  // Create Participants
+  // STILL IN CALLBACK HELL - YOU SHOULD HAVE TURNED BACK!
+  Participant.deleteMany({}, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Removed participant documents");
+      User.findOneAndUpdate({_id: "5d39f81fd0b4cb775333fb94"}, {participants: []}, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Removed participants from jbastean user");
+          dbParticipantSeeds.forEach((item) => {
+            Participant.create(item, (err, addedParticipant) => {
+              if (err) {
+                console.log(err);
+              } else {
+                User.findOneAndUpdate({_id: "5d39f81fd0b4cb775333fb94"}, { $push: {participants: addedParticipant}}, (err) => {
+                  if (err) {
+                    console.log(err);
+                  }
+                })
+              }
+            })
+          })
+        }
+      })
+    }
+  })
 
 
 }
