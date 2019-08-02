@@ -55,17 +55,17 @@ const dbWorkerSeeds = [
     city: "Cartoon Network",
     state: "NY",
     zip: "12345",
-    phone: "123-456-7890",
+    phone: "1234567890",
     email: "johnny@bravo.com",
     emergencyContacts: [
       {
         name: "Heeeeey",
-        phone: "333-333-3333",
+        phone: "3333333333",
         relationship: "Pretty Mama"
       },
       {
         name: "Alvin the Chipmunk",
-        phone: "567-567-5678",
+        phone: "5675675678",
         relationship: "Pet"
       }
     ],
@@ -82,17 +82,17 @@ const dbWorkerSeeds = [
     city: "Camoor",
     state: "Therin",
     zip: "42424",
-    phone: "321-543-6547",
+    phone: "3215436547",
     email: "sabetha@gb.com",
     emergencyContacts: [
       {
         name: "Locke Lamora",
-        phone: "777-777-7777",
+        phone: "7777777777",
         relationship: "It's Complicated"
       },
       {
         name: "Jean Tannen",
-        phone: "654-623-8376",
+        phone: "6546238376",
         relationship: "Friend"
       }
     ],
@@ -123,38 +123,38 @@ const seedDb = () => {
     })
   });
 
-  // Delete all workers
+  // ENTERING CALLBACK HELL - BEWARE ALL YE WHO ENTER HERE
   Worker.deleteMany({}, (err) => {
     if (err) {
       console.log(err);
     } else {
       console.log("Removed worker documents");
-    }
-  });
-
-  User.findOneAndUpdate({_id: "5d39f81fd0b4cb775333fb94"}, {workers: []}, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Removed workers from jbastean user");
-    }
-  }).then(
-    dbWorkerSeeds.forEach((item) => {
-      Worker.create(item, (err, addedWorker) => {
+      User.findOneAndUpdate({_id: "5d39f81fd0b4cb775333fb94"}, {workers: []}, (err) => {
         if (err) {
           console.log(err);
         } else {
-          User.findOneAndUpdate({_id: "5d39f81fd0b4cb775333fb94"}, { $push: {workers: addedWorker}}, (err) => {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log("Added worker");
-            }
+          console.log("Removed workers from jbastean user");
+          dbWorkerSeeds.forEach((item) => {
+            Worker.create(item, (err, addedWorker) => {
+              if (err) {
+                console.log(err);
+              } else {
+                User.findOneAndUpdate({_id: "5d39f81fd0b4cb775333fb94"}, { $push: {workers: addedWorker}}, (err) => {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    console.log("Added worker");
+                  }
+                })
+              }
+            })
           })
         }
       })
-    })
-  )
+    }
+  });
+
+
 }
 
 module.exports = seedDb;
