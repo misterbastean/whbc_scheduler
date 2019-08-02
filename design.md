@@ -45,14 +45,14 @@ Start off at landing page with banner at top to login as user, but shows index o
 |Update User           | PUT     | /users/:id
 |Delete User           | DELETE  | /users/:id
 
+
 #### Workers
 | Name                 | Method  | Endpoint
 |----------------------|---------|----------
 |Worker Index (remove?)| GET     | /users/:id/workers
 |New Worker Form       | GET     | /users/:id/workers/new
 |Create Worker         | POST    | /users/:id/workers
-|Show Worker           | GET     | /users/:id/workers/:wid
-|Edit Worker           | GET     | /users/:id/workers/:wid/edit
+|Show/Edit Worker      | GET     | /users/:id/workers/:wid
 |Update Worker         | PUT     | /users/:id/workers/:wid
 |Delete Worker         | DELETE  | /users/:id/workers/:wid
 
@@ -62,8 +62,7 @@ Start off at landing page with banner at top to login as user, but shows index o
 |Participant Index     | GET     | /users/:id/participants
 |New Participant Form  | GET     | /users/:id/participants/new
 |Create Participant    | POST    | /users/:id/participants
-|Show Participant      | GET     | /users/:id/participants/:pid
-|Edit Participant      | GET     | /users/:id/participants/:pid/edit
+|Show/Edit Participant | GET     | /users/:id/participants/:pid
 |Update Participant    | PUT     | /users/:id/participants/:pid
 |Delete Participant    | DELETE  | /users/:id/participants/:pid
 
@@ -165,13 +164,13 @@ Object representing a participant (i.e. a person attending the event). Currently
   gender: String,  
   dob: Date,  
   medical: String,
+  allergies: [String],
   address: String,  
   city: String,  
   state: String,  
   zip: String,  
   phone: String, // 5555555555  
-  email: String,  
-  allergies: [String],  
+  email: String,   
   emergencyContacts: [
     {
       name: String,  
