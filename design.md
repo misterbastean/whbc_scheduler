@@ -77,18 +77,19 @@ Object representing an event. image_url should include "http[s]://"
   name: String,  
   description: String,  
   imageUrl: String,  
-  contact: User,  
   registrationCutoff: Date,  
   startDate: Date,
   endDate: Date,  
-  workerRoles: [{
-    name: String,
-    workers: [Worker]
-  }],  
-  participantGroups: [{
-    name: String,
-    participants: [Participant]
-  }]
+  workerRoles: [String],  
+  participantGroups: [String],
+  workers: [Worker],
+  participants: [Participant],
+  owner: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    }
+  }
 }
 ```
 
@@ -104,6 +105,7 @@ Consider implementing Google SSO.
 ```javascript
 {  
   username: String,
+  password: String, //Hashed by passport-local-mongoose
   email: String,
   phone: String,
   isAdmin: Boolean,
@@ -120,8 +122,8 @@ Consider implementing Google SSO.
       ref: "Participant"
     }
   ],
-  salt: String,
-  hash: String
+  salt: String, // Not in model, created by Passport before storing
+  hash: String  // Not in model, created by Passport before storing
 }
 ```
 
