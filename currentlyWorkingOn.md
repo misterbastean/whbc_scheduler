@@ -1,7 +1,9 @@
-- Worker update route - need to add logic to actually update the workers.
+- New Participant form, then need to do the route, followed by the edit form and route.
 
 Important Later:
 - Implement Mongoose remove middleware to remove workers/participants associated with a user when the user is removed: https://stackoverflow.com/a/14349259
+- Add authorization for each route as needed
+- Front-end stuff (make it purty!)
 
 
 Small Stuff:

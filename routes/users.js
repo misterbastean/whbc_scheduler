@@ -184,7 +184,7 @@ router.get('/:id/participants', (req, res) => {
 });
 
 router.get('/:id/participants/new', (req, res) => {
-  res.send(`Show form to create new participant associated with user ID ${req.params.id}`)
+  res.render('participants/newParticipant');
 });
 
 router.post('/:id/participants', (req, res) => {
