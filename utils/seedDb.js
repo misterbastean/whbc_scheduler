@@ -118,10 +118,10 @@ const seedDb = () => {
       if (err) {
         console.log(err);
       } else {
-        console.log("Event added");
       }
     })
   });
+  console.log("Created events");
 
   // ENTERING CALLBACK HELL - BEWARE ALL YE WHO ENTER HERE
   Worker.deleteMany({}, (err) => {
@@ -142,13 +142,12 @@ const seedDb = () => {
                 User.findOneAndUpdate({_id: "5d39f81fd0b4cb775333fb94"}, { $push: {workers: addedWorker}}, (err) => {
                   if (err) {
                     console.log(err);
-                  } else {
-                    console.log("Added worker");
                   }
                 })
               }
             })
           })
+          console.log("Added workers");
         }
       })
     }
