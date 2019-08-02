@@ -249,8 +249,6 @@ const seedDb = () => {
       })
     }
   })
-
-
 }
 
 module.exports = seedDb;
