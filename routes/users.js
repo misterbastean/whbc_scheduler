@@ -130,11 +130,14 @@ router.post('/:id/workers', (req, res) => { // Need to add middleware to authori
 });
 
 router.get('/:id/workers/:wid', (req, res) => {
-  res.send(`Get information about worker ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
-});
-
-router.get('/:id/workers/:wid/edit', (req, res) => {
-  res.send(`Show edit form for worker ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
+  Worker.findById(req.params.wid, (err, foundWorker) => {
+    if (err) {
+      console.log(err);
+      res.redirect("back")
+    } else {
+      res.render("workers/editWorker", {foundWorker})
+    }
+  })
 });
 
 router.put('/:id/workers/:wid', (req, res) => {

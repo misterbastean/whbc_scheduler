@@ -8,6 +8,8 @@ Important Later:
 Small Stuff:
 - Update new user password verify so that it verifies on front end prior to form submission
 - Password reset via email
+- Add dropdown for relationship of emergency contacts to prevent problems caused by strange characters
+- Validate inputs (e.g. worker zip code is 5 digits, all phone numbers are 10, etc.)
 
 
 Future Ideas
