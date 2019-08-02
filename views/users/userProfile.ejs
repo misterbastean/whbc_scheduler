@@ -23,7 +23,7 @@
       <h6 class="mt-1 font-weight-light"><%= currentUser.phone %></h6>
     </div>
 
-    
+
     <div class="col-md-9 p-2 d-flex flex-column justify-content-center">
       <!-- Worker Section -->
       <% if (userParams.workers.length > 0) { %>
@@ -41,7 +41,10 @@
       <% } %>
 
     <!-- End Worker Section -->
-
+    <hr style="width: 100%; color: black; height: 1px; background-color: black;" />
+    <p>
+      Participants (remove after enabling toggle)
+      </p>
     <!-- Participant Section -->
       <% if (userParams.participants.length > 0) { %>
         <% userParams.participants.forEach((participant) => { %>
@@ -58,10 +61,10 @@
       <% } %>
     <!-- End Participant Section -->
     </div>
-
-    <a href="/users/<%= currentUser._id %>/workers/new">Add Worker</a>
-    <a href="/users/<%= currentUser._id %>/participants/new">Add Participant</a>
   </div>
+  <a href="/users/<%= currentUser._id %>/workers/new">Add Worker</a>
+  <br />
+  <a href="/users/<%= currentUser._id %>/participants/new">Add Participant</a>
 
 </div>
 
