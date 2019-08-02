@@ -14,11 +14,11 @@
     <div class="form-row">
       <div class="form-group col-md-5">
         <label for="firstName">First Name</label>
-        <input type="text" class="form-control" id="firstName" name="firstName" value="<%= foundWorker.firstName %>">
+        <input type="text" class="form-control" id="firstName" name="firstName" value="<%= foundWorker.firstName %>" required>
       </div>
       <div class="form-group col-md-5">
         <label for="lastName">Last Name</label>
-        <input type="text" class="form-control" id="lastName" name="lastName" value="<%= foundWorker.lastName %>">
+        <input type="text" class="form-control" id="lastName" name="lastName" value="<%= foundWorker.lastName %>" required>
       </div>
       <div class="form-group col-md-2">
         <label for="gender">Gender</label>
@@ -30,16 +30,16 @@
     </div>
     <div class="form-group">
       <label for="dob" class="mt-2">Date of Birth</label>
-      <input class="form-control" id="dob" name="dob" width="276" value="<%= foundWorker.dob.toLocaleDateString("en-US") %>">
+      <input class="form-control" id="dob" name="dob" width="276" value="<%= foundWorker.dob.toLocaleDateString("en-US") %>" required>
     </div>
     <div class="form-group">
       <label for="address">Address</label>
-      <input type="text" class="form-control" id="address" name="address" value="<%= foundWorker.address %>">
+      <input type="text" class="form-control" id="address" name="address" value="<%= foundWorker.address %>" required>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="city">City</label>
-        <input type="text" class="form-control" id="city" name="city" value="<%= foundWorker.city %>">
+        <input type="text" class="form-control" id="city" name="city" value="<%= foundWorker.city %>" required>
       </div>
       <div class="form-group col-md-4">
         <label for="state">State</label>
@@ -99,7 +99,7 @@
       </div>
       <div class="form-group col-md-2">
         <label for="zip">Zip</label>
-        <input type="text" class="form-control" id="zip" name="zip" value="<%= foundWorker.zip %>">
+        <input type="text" class="form-control" id="zip" name="zip" value="<%= foundWorker.zip %>" required>
       </div>
     </div>
     <div class="form-group">
@@ -107,11 +107,11 @@
         const formattedPhone = foundWorker.phone.slice(0, 3) + "-" + foundWorker.phone.slice(3, 6) + "-" + foundWorker.phone.slice(6)
       %>
       <label for="phone">Phone Number</label>
-      <input type="text" class="form-control" id="phone" name="phone"  value="<%= formattedPhone %>">
+      <input type="text" class="form-control" id="phone" name="phone"  value="<%= formattedPhone %>" required>
     </div>
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" class="form-control" id="email" name="email" value="<%= foundWorker.email %>">
+      <input type="email" class="form-control" id="email" name="email" value="<%= foundWorker.email %>" required>
     </div>
     <div class="form-group">
       <label for="shirtSize">Shirt Size</label>
@@ -128,7 +128,7 @@
     <h3 class="mt-5 mb-3">Emergency Contacts</h3>
     <div class="form-group">
       <label for="ecOneName">Emergency Contact 1 Name</label>
-      <input class="form-control" id="ecOneName" type="text" name="emergencyContacts[0][name]" value="<%= foundWorker.emergencyContacts[0].name %>">
+      <input class="form-control" id="ecOneName" type="text" name="emergencyContacts[0][name]" value="<%= foundWorker.emergencyContacts[0].name %>" required>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
@@ -136,17 +136,17 @@
           const ecOneFormattedPhone = foundWorker.emergencyContacts[0].phone.slice(0, 3) + "-" + foundWorker.emergencyContacts[0].phone.slice(3, 6) + "-" + foundWorker.emergencyContacts[0].phone.slice(6)
         %>
         <label for="ecOnePhone">Emergency Contact 1 Phone Number</label>
-        <input class="form-control" id="ecOnePhone" type="text" name="emergencyContacts[0][phone]" value="<%= ecOneFormattedPhone %>">
+        <input class="form-control" id="ecOnePhone" type="text" name="emergencyContacts[0][phone]" value="<%= ecOneFormattedPhone %>" required>
       </div>
       <div class="form-group col-md-6">
         <label for="ecOneRelationship">Emergency Contact 1 Relationship</label>
-        <input class="form-control" id="ecOneRelationship" type="text" name="emergencyContacts[0][relationship]" value="<%= foundWorker.emergencyContacts[0].relationship %>">
+        <input class="form-control" id="ecOneRelationship" type="text" name="emergencyContacts[0][relationship]" value="<%= foundWorker.emergencyContacts[0].relationship %>" required>
       </div>
     </div>
     <br />
     <div class="form-group">
       <label for="edTwoName">Emergency Contact 2 Name</label>
-      <input class="form-control" id="edTwoName" type="text" name="emergencyContacts[1][name]" value="<%= foundWorker.emergencyContacts[1].name %>">
+      <input class="form-control" id="edTwoName" type="text" name="emergencyContacts[1][name]" value="<%= foundWorker.emergencyContacts[1].name %>" required>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
@@ -154,11 +154,11 @@
           const ecTwoFormattedPhone = foundWorker.emergencyContacts[1].phone.slice(0, 3) + "-" + foundWorker.emergencyContacts[1].phone.slice(3, 6) + "-" + foundWorker.emergencyContacts[1].phone.slice(6)
         %>
         <label for="ecTwoPhone">Emergency Contact 2 Phone Number</label>
-        <input class="form-control" id="ecTwoPhone" type="text" name="emergencyContacts[1][phone]" value="<%= ecTwoFormattedPhone %>">
+        <input class="form-control" id="ecTwoPhone" type="text" name="emergencyContacts[1][phone]" value="<%= ecTwoFormattedPhone %>" required>
       </div>
       <div class="form-group col-md-6">
         <label for="ecTwoRelationship">Emergency Contact 1 Relationship</label>
-        <input class="form-control" id="ecTwoRelationship" type="text" name="emergencyContacts[1][relationship]" value="<%= foundWorker.emergencyContacts[1].relationship %>">
+        <input class="form-control" id="ecTwoRelationship" type="text" name="emergencyContacts[1][relationship]" value="<%= foundWorker.emergencyContacts[1].relationship %>" required>
       </div>
     </div>
     <br />

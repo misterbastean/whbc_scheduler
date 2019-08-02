@@ -1,5 +1,4 @@
-- Created Worker route. Need to test further to make sure it works, then need to get rid of edge cases/formatting (e.g. phone number format, etc.).
-- Just finished updating seedDb so that it creates 2 workers for the jbastean user. Need to work on the user profile page to display them.
+- Worker update route - need to add logic to actually update the workers.
 
 Important Later:
 - Implement Mongoose remove middleware to remove workers/participants associated with a user when the user is removed: https://stackoverflow.com/a/14349259

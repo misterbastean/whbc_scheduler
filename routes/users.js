@@ -141,7 +141,34 @@ router.get('/:id/workers/:wid', (req, res) => {
 });
 
 router.put('/:id/workers/:wid', (req, res) => {
-  res.send(`Update information for worker ID ${req.params.wid}, who is associated with user ID ${req.params.id}`)
+  // Create update object
+  let updatedWorker = (({firstName, lastName, gender, dob, address, city, state, zip, email, shirtSize, comments}) => ({firstName, lastName, gender, dob, address, city, state, zip, email, shirtSize, comments}))(req.body)
+  // Format Phone
+  let formattedPhone = req.body.phone.replace(/-/g, "").replace(/\s/g, "")
+  updatedWorker.phone = formattedPhone
+
+  // Format emergency contacts
+  let formattedContactOne = {
+    name: req.body.emergencyContacts[0].name,
+    phone: req.body.emergencyContacts[0].phone.replace(/-/g, "").replace(/\s/g, ""),
+    relationship: req.body.emergencyContacts[0].relationship
+  }
+
+  let formattedContactTwo = {
+    name: req.body.emergencyContacts[1].name,
+    phone: req.body.emergencyContacts[1].phone.replace(/-/g, "").replace(/\s/g, ""),
+    relationship: req.body.emergencyContacts[1].relationship
+  }
+  updatedWorker.emergencyContacts = [formattedContactOne, formattedContactTwo]
+
+  Worker.findByIdAndUpdate(req.params.wid, updatedWorker, (err) => {
+    if (err) {
+      console.log(err);
+      res.redirect('back')
+    } else {
+      res.redirect(`/users/${req.user._id}`)
+    }
+  })
 });
 
 router.delete('/:id/workers/:wid', (req, res) => {
