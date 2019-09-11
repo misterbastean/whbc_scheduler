@@ -244,16 +244,16 @@ router.post('/:id/participants', (req, res) => {
       })
 
       // Add Participant to Databaser
-      Participant.create(newParticipant, (err, createdWorker) => {
+      Participant.create(newParticipant, (err, createdParticipant) => {
         if (err) {
           console.log(err);
           res.redirect("back")
         } else {
           // Push Participant to User.participants
-          foundUser.participants.push(createdWorker);
+          foundUser.participants.push(createdParticipant);
           foundUser.save();
           console.log(`Added new participant to ${foundUser.username}!`);
-          console.log(createdWorker);
+          console.log(createdParticipant);
           res.redirect(`/users/${req.user._id}`)
         }
       })
@@ -267,7 +267,8 @@ router.get('/:id/participants/:pid', (req, res) => {
       console.log(err);
       res.redirect("back");
     } else {
-      res.render("participants/editParticipant", foundParticipant)
+      console.log(foundParticipant);
+      res.render("participants/editParticipant", {foundParticipant})
     }
   })
 });
