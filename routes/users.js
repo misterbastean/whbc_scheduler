@@ -267,7 +267,6 @@ router.get('/:id/participants/:pid', (req, res) => {
       console.log(err);
       res.redirect("back");
     } else {
-      console.log(foundParticipant);
       res.render("participants/editParticipant", {foundParticipant})
     }
   })
