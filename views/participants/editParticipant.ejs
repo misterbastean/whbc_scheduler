@@ -228,12 +228,24 @@
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="ecThreeName">Authorized Pickup 2 Name</label>
-        <input class="form-control" id="ecThreeName" type="text" name="authorizedPickups[2][name]" placeholder="Jane Doe">
+        <label for="ecTwoName">Authorized Pickup 3 Name</label>
+        <% if (foundParticipant.authorizedPickups[2]) { %>
+          <input class="form-control" id="ecTwoName" type="text" name="authorizedPickups[2][name]" value="<%= foundParticipant.authorizedPickups[2].name %>">
+        <% } else { %>
+          <input class="form-control" id="ecTwoName" type="text" name="authorizedPickups[2][name]" placeholder="Jane Doe">
+        <% } %>
+
       </div>
       <div class="form-group col-md-6">
-        <label for="ecThreePhone">Authorized Pickup 2 Phone Number</label>
-        <input class="form-control" id="ecThreePhone" type="text" name="authorizedPickups[2][phone]" placeholder="555-555-5555">
+        <label for="ecTwoPhone">Authorized Pickup 2 Phone Number</label>
+        <% if (foundParticipant.authorizedPickups[2]) { %>
+          <% // Phone number formatting
+            const apThreeFormattedPhone = foundParticipant.authorizedPickups[2].phone.slice(0, 3) + "-" + foundParticipant.authorizedPickups[2].phone.slice(3, 6) + "-" + foundParticipant.authorizedPickups[2].phone.slice(6)
+          %>
+          <input class="form-control" id="ecTwoPhone" type="text" name="authorizedPickups[2][phone]" value="<%= apThreeFormattedPhone %>">
+        <% } else { %>
+          <input class="form-control" id="ecTwoPhone" type="text" name="authorizedPickups[2][phone]" placeholder="555-555-5555">
+        <% } %>
       </div>
     </div>
     <br />
@@ -242,8 +254,8 @@
       <div class="form-group col-md-6">
         <label for="churchMember">Does this participant attend a church regularly?</label>
         <select id="churchMember" name="churchMember" class="form-control" required>
-          <option value="true">Yes</option>
-          <option value="false">No</option>
+          <option value="true" <%= foundParticipant.churchMember ? "selected" : ""  %>>Yes</option>
+          <option value="false" <%= !foundParticipant.churchMember ? "selected" : ""  %>>No</option>
         </select>
       </div>
       <div class="form-group col-md-6">
@@ -255,22 +267,22 @@
       <div class="form-group col-md-6">
         <label for="photoPermission">May we have permission to photograph this participant?</label>
         <select id="photoPermission" name="photoPermission" class="form-control" required>
-          <option value="true">Yes</option>
-          <option value="false">No</option>
+          <option value="true" <%= foundParticipant.photoPermission ? "selected" : ""  %>>Yes</option>
+          <option value="false" <%= !foundParticipant.photoPermission ? "selected" : ""  %>>No</option>
         </select>
       </div>
       <div class="form-group col-md-6">
         <label for="photoPublication">May we have permission to publish photos of this participant?</label>
         <select id="photoPublication" name="photoPublication" class="form-control" required>
-          <option  value="true">Yes</option>
-          <option  value="false">No</option>
+          <option  value="true" <%= foundParticipant.photoPublication ? "selected" : ""  %>>Yes</option>
+          <option  value="false" <%= !foundParticipant.photoPublication ? "selected" : ""  %>>No</option>
         </select>
       </div>
     </div>
 
     <div class="form-group">
       <label for="comments">Comments (optional)</label>
-      <textarea class="form-control" name="comments" id="comments" rows="6"></textarea>
+      <textarea class="form-control" name="comments" id="comments" rows="6"><%= foundParticipant.comments %></textarea>
     </div>
 
     <button type="submit" class="btn btn-primary mt-4">Submit</button>
