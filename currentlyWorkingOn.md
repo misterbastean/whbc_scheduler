@@ -1,4 +1,4 @@
-- Participant Edit form and route (currently doesn't fill the data in automatically). Then figure out how to toggle between workers and participants on the user profile page. Hint: use jQuery toggle().
+- Just finished logic for Participant Edit form and route (to fill the data in automatically), but this needs lots of testing and handling of edge cases. Then figure out how to toggle between workers and participants on the user profile page. Hint: probably jQuery toggle().
 
 Important Later:
 - Implement Mongoose "remove" middleware to remove workers/participants associated with a user when the user is removed: https://stackoverflow.com/a/14349259
