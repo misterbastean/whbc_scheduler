@@ -128,6 +128,20 @@ const dbParticipantSeeds = [
         relationship: "Pet"
       }
     ],
+    authorizedPickups: [
+      {
+        name: "Pickup One",
+        phone: "1231231234"
+      },
+      {
+        name: "Pickup Two",
+        phone: "3453453455"
+      },
+      {
+        name: "Pickup Three",
+        phone: "7777777777"
+      }
+    ],
     shirtSize: "XXL",
     churchMember: true,
     church: "West Hartsville",
@@ -158,6 +172,20 @@ const dbParticipantSeeds = [
         name: "Jean Tannen",
         phone: "6546238376",
         relationship: "Friend"
+      }
+    ],
+    authorizedPickups: [
+      {
+        name: "Pickup One",
+        phone: "1231231234"
+      },
+      {
+        name: "Pickup Two",
+        phone: "3453453455"
+      },
+      {
+        name: "Pickup Three",
+        phone: "7777777777"
       }
     ],
     shirtSize: "M",

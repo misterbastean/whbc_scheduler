@@ -136,6 +136,11 @@
         </select>
       </div>
     </div>
+
+    <!-- ================== -->
+    <!-- EMERGENCY CONTACTS -->
+    <!-- ================== -->
+
     <h3 class="mt-5 mb-3">Emergency Contacts</h3>
     <small class="form-text text-muted mb-3">
       Enter two people who will be called in the event of an emergency. The first person will be the primary contact, with the second only being contacted if we are unable to contact the first.
@@ -176,29 +181,48 @@
       </div>
     </div>
     <br />
+
+    <!-- ================== -->
+    <!-- AUTHORIZED PICKUPS -->
+    <!-- ================== -->
+
     <h3 class="mt-5 mb-3">Authorized Pickups</h3>
     <small class="form-text text-muted mb-3">
-      Enter up to three people who are authorized to pickup this participant. In order to ensure the safety of the participant, they will not be released to anyone other than these people.
+      Enter between one and three people who are authorized to pickup this participant. In order to ensure the safety of the participant, they will not be released to anyone other than these people.
     </small>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="ecOneName">Authorized Pickup 1 Name</label>
-        <input class="form-control" id="ecOneName" type="text" name="authorizedPickups[0][name]" placeholder="Jane Doe" required>
+        <input class="form-control" id="ecOneName" type="text" name="authorizedPickups[0][name]" value="<%= foundParticipant.authorizedPickups[0].name %>" required>
       </div>
+      <% // Phone number formatting
+        const apOneFormattedPhone = foundParticipant.authorizedPickups[0].phone.slice(0, 3) + "-" + foundParticipant.authorizedPickups[0].phone.slice(3, 6) + "-" + foundParticipant.authorizedPickups[0].phone.slice(6)
+      %>
       <div class="form-group col-md-6">
         <label for="ecOnePhone">Authorized Pickup 1 Phone Number</label>
-        <input class="form-control" id="ecOnePhone" type="text" name="authorizedPickups[0][phone]" placeholder="555-555-5555" required>
+        <input class="form-control" id="ecOnePhone" type="text" name="authorizedPickups[0][phone]" value="<%= apOneFormattedPhone %>" required>
       </div>
     </div>
-
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="ecTwoName">Authorized Pickup 2 Name</label>
-        <input class="form-control" id="ecTwoName" type="text" name="authorizedPickups[1][name]" placeholder="Jane Doe">
+        <% if (foundParticipant.authorizedPickups[1]) { %>
+          <input class="form-control" id="ecTwoName" type="text" name="authorizedPickups[1][name]" value="<%= foundParticipant.authorizedPickups[1].name %>">
+        <% } else { %>
+          <input class="form-control" id="ecTwoName" type="text" name="authorizedPickups[1][name]" placeholder="Jane Doe">
+        <% } %>
+
       </div>
       <div class="form-group col-md-6">
         <label for="ecTwoPhone">Authorized Pickup 2 Phone Number</label>
-        <input class="form-control" id="ecTwoPhone" type="text" name="authorizedPickups[1][phone]" placeholder="555-555-5555">
+        <% if (foundParticipant.authorizedPickups[1]) { %>
+          <% // Phone number formatting
+            const apTwoFormattedPhone = foundParticipant.authorizedPickups[1].phone.slice(0, 3) + "-" + foundParticipant.authorizedPickups[1].phone.slice(3, 6) + "-" + foundParticipant.authorizedPickups[1].phone.slice(6)
+          %>
+          <input class="form-control" id="ecTwoPhone" type="text" name="authorizedPickups[1][phone]" value="<%= apTwoFormattedPhone %>">
+        <% } else { %>
+          <input class="form-control" id="ecTwoPhone" type="text" name="authorizedPickups[1][phone]" placeholder="555-555-5555">
+        <% } %>
       </div>
     </div>
 
