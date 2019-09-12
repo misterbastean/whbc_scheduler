@@ -1,7 +1,7 @@
 - Participant Edit form and route (currently doesn't fill the data in automatically). Then figure out how to toggle between workers and participants on the user profile page. Hint: use jQuery toggle().
 
 Important Later:
-- Implement Mongoose remove middleware to remove workers/participants associated with a user when the user is removed: https://stackoverflow.com/a/14349259
+- Implement Mongoose "remove" middleware to remove workers/participants associated with a user when the user is removed: https://stackoverflow.com/a/14349259
 - Add authorization for each route as needed
 - Front-end stuff (make it purty!)
 - Fix Registration Cutoff in editEvent to be a datepicker
@@ -11,7 +11,7 @@ Small Stuff:
 - Update new user password verify so that it verifies on front end prior to form submission
 - Password reset via email
 - Add dropdown for relationship of emergency contacts to prevent problems caused by strange characters
-- Validate inputs (e.g. worker zip code is 5 digits, all phone numbers are 10, etc.)
+- Validate inputs (e.g. zip codes are 5 digits, phone numbers are 10, etc.)
 
 
 Future Ideas
