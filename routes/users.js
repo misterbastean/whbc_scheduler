@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
   } else {
     const newUser = new User({
       username: req.body.username,
-      phone: req.body.phone,
+      phone: req.body.phone.replace(/\D/g,''),
       email: req.body.email,
       isAdmin: false,
       isSuperuser: false
@@ -111,7 +111,7 @@ router.post('/:id/workers', (req, res) => { // Need to add middleware to authori
         city: req.body.city,
         state: req.body.state,
         zip: req.body.zip,
-        phone: req.body.phone,
+        phone: req.body.phone.replace(/\D/g,''),
         email: req.body.email,
         emergencyContacts: req.body.emergencyContacts,
         shirtSize: req.body.shirtSize,
@@ -153,19 +153,19 @@ router.put('/:id/workers/:wid', (req, res) => {
   // Create update object
   let updatedWorker = (({firstName, lastName, gender, dob, address, city, state, zip, email, shirtSize, comments}) => ({firstName, lastName, gender, dob, address, city, state, zip, email, shirtSize, comments}))(req.body)
   // Format Phone
-  let formattedPhone = req.body.phone.replace(/-/g, "").replace(/\s/g, "")
+  let formattedPhone = req.body.phone.replace(/\D/g,'')
   updatedWorker.phone = formattedPhone
 
   // Format emergency contacts
   let formattedContactOne = {
     name: req.body.emergencyContacts[0].name,
-    phone: req.body.emergencyContacts[0].phone.replace(/-/g, "").replace(/\s/g, ""),
+    phone: req.body.emergencyContacts[0].phone.replace(/\D/g,''),
     relationship: req.body.emergencyContacts[0].relationship
   }
 
   let formattedContactTwo = {
     name: req.body.emergencyContacts[1].name,
-    phone: req.body.emergencyContacts[1].phone.replace(/-/g, "").replace(/\s/g, ""),
+    phone: req.body.emergencyContacts[1].phone.replace(/\D/g,''),
     relationship: req.body.emergencyContacts[1].relationship
   }
   updatedWorker.emergencyContacts = [formattedContactOne, formattedContactTwo]
@@ -213,7 +213,7 @@ router.post('/:id/participants', (req, res) => {
         city: req.body.city,
         state: req.body.state,
         zip: req.body.zip,
-        phone: req.body.phone.replace(/-/g, "").replace(/\s/g, ""),
+        phone: req.body.phone.replace(/\D/g,''),
         email: req.body.email,
         emergencyContacts: [],
         authorizedPickups: [],
@@ -230,7 +230,7 @@ router.post('/:id/participants', (req, res) => {
       req.body.emergencyContacts.forEach((contact) => {
         newParticipant.emergencyContacts.push({
           name: contact.name,
-          phone: contact.phone.replace(/-/g, "").replace(/\s/g, ""),
+          phone: contact.phone.replace(/\D/g,''),
           relationship: contact.relationship
         })
       })
@@ -239,7 +239,7 @@ router.post('/:id/participants', (req, res) => {
       req.body.authorizedPickups.forEach((pickup) => {
         newParticipant.authorizedPickups.push({
           name: pickup.name,
-          phone: pickup.phone.replace(/-/g, "").replace(/\s/g, "")
+          phone: pickup.phone.replace(/\D/g,'')
         })
       })
 
@@ -273,7 +273,49 @@ router.get('/:id/participants/:pid', (req, res) => {
 });
 
 router.put('/:id/participants/:pid', (req, res) => {
-  res.send(`Update information for participant ID ${req.params.pid}, who is associated with user ID ${req.params.id}`)
+  // Create update object
+  let updatedParticipant = (({firstName, lastName, gender, dob, medical, address, city, state, zip, email, shirtSize, churchMember, church, photoPermission, photoPublication, comments}) => ({firstName, lastName, gender, dob, medical, address, city, state, zip, email, shirtSize, churchMember, church, photoPermission, photoPublication, comments}))(req.body)
+  // Format Phone
+  let formattedPhone = req.body.phone.replace(/\D/g,'')
+  updatedParticipant.phone = formattedPhone
+
+  // Format Emergency Contacts
+  let formattedContactOne = {
+    name: req.body.emergencyContacts[0].name,
+    phone: req.body.emergencyContacts[0].phone.replace(/\D/g,''),
+    relationship: req.body.emergencyContacts[0].relationship
+  }
+
+  let formattedContactTwo = {
+    name: req.body.emergencyContacts[1].name,
+    phone: req.body.emergencyContacts[1].phone.replace(/\D/g,''),
+    relationship: req.body.emergencyContacts[1].relationship
+  }
+  updatedParticipant.emergencyContacts = [formattedContactOne, formattedContactTwo]
+
+  // Format Authorized Pickups
+  const allPickups = req.body.authorizedPickups
+  let formattedPickups = [];
+  allPickups.forEach((pickup) => {
+    console.log(pickup.phone);
+    let formattedPickup = {
+      name: pickup.name,
+      phone: pickup.phone.replace(/\D/g,''),
+    }
+    console.log(formattedPickup.phone);
+    formattedPickups.push(formattedPickup);
+  })
+  updatedParticipant.authorizedPickups = formattedPickups
+  console.log(updatedParticipant.authorizedPickups);
+
+  Participant.findByIdAndUpdate(req.params.pid, updatedParticipant, (err) => {
+    if (err) {
+      console.log(err);
+      res.redirect('back')
+    } else {
+      res.redirect(`/users/${req.user._id}`)
+    }
+  })
 });
 
 router.delete('/:id/participants/:pid', (req, res) => {
