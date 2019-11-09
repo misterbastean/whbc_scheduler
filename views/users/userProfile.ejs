@@ -10,8 +10,8 @@
       <h1><%= currentUser.username %></h1>
     </div>
     <div class="col-md-9 d-flex justify-content-around align-items-center">
-      <a class="align-middle text-decoration-none activeTab" href="#" onclick="toggleTabs(workerDiv, participantDiv)" id="workers-button">Workers</a>
-      <a class="align-middle text-decoration-none" href="#" onclick="toggleTabs(participantDiv, workerDiv)" id="participants-button">Participants</a>
+      <a class="align-middle text-decoration-none activeTab" href="#" onclick="toggleTabs(workerDiv, workerLink, participantDiv, participantLink)" id="workers-button">Workers</a>
+      <a class="align-middle text-decoration-none" href="#" onclick="toggleTabs(participantDiv, participantLink, workerDiv, workerLink)" id="participants-button">Participants</a>
     </div>
   </div>
   <div class="row">
@@ -84,14 +84,17 @@
 
 </div>
 
-<!-- <script src="/public/js/workerModeToggle.js"></script> -->
 <script type="text/javascript">
   const workerDiv = document.getElementById("workers");
   const participantDiv = document.getElementById("participants");
+  const workerLink = document.getElementById("workers-button");
+  const participantLink = document.getElementById("participants-button");
 
-  function toggleTabs(enableDiv, disableDiv) {
+  function toggleTabs(enableDiv, enableLink, disableDiv, disableLink) {
       enableDiv.style.display = "block";
+      enableLink.classList.add("activeTab");
       disableDiv.style.display = "none";
+      disableLink.classList.remove("activeTab");
   }
 
 </script>
