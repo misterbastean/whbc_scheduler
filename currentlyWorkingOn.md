@@ -1,10 +1,15 @@
-- Just finished logic for Participant Edit form and route (to fill the data in automatically), but this needs lots of testing and handling of edge cases. Then figure out how to toggle between workers and participants on the user profile page. Hint: probably jQuery toggle().
+- Just finished logic for Participant Edit form and route (to fill the data in automatically), but this needs lots of testing and handling of edge cases.
+- Need to add logic to delete participants and workers.
 
 Important Later:
 - Implement Mongoose "remove" middleware to remove workers/participants associated with a user when the user is removed: https://stackoverflow.com/a/14349259
+- Implement "Edit Profile" button on user profile page
 - Add authorization for each route as needed
 - Front-end stuff (make it purty!)
+  - Landing page
+  - Add flash for user feedback
 - Fix Registration Cutoff in editEvent to be a datepicker
+- Archive events after their end date - should still be visible to the creator, but not display elsewhere.
 
 
 Small Stuff:

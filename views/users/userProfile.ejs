@@ -1,5 +1,5 @@
 <% include ../partials/header %>
-
+  <link rel="stylesheet" href="/public/css/userProfile.css">
 </head>
 <body>
 
@@ -10,7 +10,7 @@
       <h1><%= currentUser.username %></h1>
     </div>
     <div class="col-md-9 d-flex justify-content-around align-items-center">
-      <a class="align-middle text-decoration-none" href="#" onclick="toggleTabs(workerDiv, participantDiv)" id="workers-button">Workers</a>
+      <a class="align-middle text-decoration-none activeTab" href="#" onclick="toggleTabs(workerDiv, participantDiv)" id="workers-button">Workers</a>
       <a class="align-middle text-decoration-none" href="#" onclick="toggleTabs(participantDiv, workerDiv)" id="participants-button">Participants</a>
     </div>
   </div>
@@ -21,18 +21,29 @@
       </a>
       <h6 class="mt-2 font-weight-light"><%= currentUser.email %></h6>
       <h6 class="mt-1 font-weight-light"><%= currentUser.phone %></h6>
+      <br />
+      <br />
+      <a href="/users/<%= currentUser._id %>/workers/new">Add Worker</a>
+      <br />
+      <a href="/users/<%= currentUser._id %>/participants/new">Add Participant</a>
     </div>
 
 
     <div class="col-md-9 p-2 d-flex flex-column justify-content-center" id="wp_display">
       <!-- Worker Section -->
       <div id="workers">
+        <h3 style="border-bottom:1px solid gray; padding-bottom:5px;">Workers</h3>
         <% if (userParams.workers.length > 0) { %>
           <% userParams.workers.forEach((worker) => { %>
             <!-- Repeat for each worker -->
             <div class="d-flex justify-content-between mt-3 mb-3 tabcontent">
               <h4><%= worker.firstName %> <%= worker.lastName %></h4>
-              <a class="btn btn-success"href="/users/<%= currentUser._id %>/workers/<%= worker._id %>">Edit</a>
+              <div class="d-flex justify-content-between">
+                <a class="btn btn-success mr-1" href="/users/<%= currentUser._id %>/workers/<%= worker._id %>">Edit</a>
+                <form action="/users/<%= currentUser._id %>/workers/<%= worker._id %>?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+              </div>
             </div>
           <% }) %>
         <% } else { %>
@@ -45,12 +56,18 @@
 
       <!-- Participant Section -->
       <div id="participants" style="display:none">
+        <h3 style="border-bottom:1px solid gray; padding-bottom:5px;">Participants</h3>
         <% if (userParams.participants.length > 0) { %>
           <% userParams.participants.forEach((participant) => { %>
             <!-- Repeat for each participant -->
             <div class="d-flex justify-content-between mt-3 mb-3">
               <h4><%= participant.firstName %> <%= participant.lastName %></h4>
-              <a class="btn btn-success"href="/users/<%= currentUser._id %>/participants/<%= participant._id %>">Edit</a>
+              <div class="d-flex justify-content-between">
+                <a class="btn btn-success mr-1" href="/users/<%= currentUser._id %>/participants/<%= participant._id %>">Edit</a>
+                <form action="/users/<%= currentUser._id %>/participants/<%= participant._id %>?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+              </div>
             </div>
           <% }) %>
         <% } else { %>
@@ -63,9 +80,7 @@
 
     </div>
   </div>
-  <a href="/users/<%= currentUser._id %>/workers/new">Add Worker</a>
-  <br />
-  <a href="/users/<%= currentUser._id %>/participants/new">Add Participant</a>
+
 
 </div>
 

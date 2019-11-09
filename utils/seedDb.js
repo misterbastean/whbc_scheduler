@@ -105,8 +105,8 @@ const dbWorkerSeeds = [
 
 const dbParticipantSeeds = [
   {
-    firstName: "Johnny",
-    lastName: "Bravo",
+    firstName: "Sherlock",
+    lastName: "Holmes",
     gender: "Male",
     dob: new Date("January 1, 1980"),
     medical: "Peanut allergy",
@@ -151,8 +151,8 @@ const dbParticipantSeeds = [
     user: "jbastean"
   },
   {
-    firstName: "Sabetha",
-    lastName: "Belacoros",
+    firstName: "Mary",
+    lastName: "Watson",
     gender: "Female",
     dob: new Date("January 1, 1991"),
     medical: "",
